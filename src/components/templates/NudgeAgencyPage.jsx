@@ -221,6 +221,8 @@ const servicesSectionPreviewHtml = `
 </html>
 `;
 
+const contactFormHtmlWithAssets = contactFormHtml.replace('/material/2-removebg.png', webnudgeJumpMascot);
+
 const contactFormPreviewHtml = `
 <!doctype html>
 <html lang="ko">
@@ -247,7 +249,7 @@ const contactFormPreviewHtml = `
         padding: 0;
       }
     </style>
-    ${contactFormHtml}
+    ${contactFormHtmlWithAssets}
   </head>
 </html>
 `;
@@ -2903,6 +2905,7 @@ function FaqSection() {
             )}
             eyebrowFontSize={18}
             title="상담 전에 자주 묻는 질문"
+            titleFontSize={{ xs: 33, md: 55 }}
             description="PRD의 서비스 소개, 포트폴리오, 확장성 요구를 기준으로 답변을 정리했습니다."
           />
         </Stack>
@@ -3280,6 +3283,7 @@ function SectionHeading({
   eyebrowImageTransform,
   titleLineGap,
   titleLineHeight,
+  titleFontSize,
   descriptionFontSize = 21,
   sx,
 }) {
@@ -3321,7 +3325,7 @@ function SectionHeading({
       <Typography
         variant="h2"
         sx={{
-          fontSize: { xs: 36, md: 58 },
+          fontSize: titleFontSize ?? { xs: 36, md: 58 },
           overflowWrap: 'break-word',
           lineHeight: titleLineHeight ?? (titleLineGap ? `calc(1em + ${titleLineGap} + 10px)` : 'calc(1em + 10px)'),
           color: isInverted ? 'common.white' : 'text.primary',
