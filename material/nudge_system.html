@@ -1,0 +1,210 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Helvetica Neue',Arial,sans-serif;}
+.outer{background:#0a0a0a;border-radius:12px;overflow:hidden;display:flex;gap:0;}
+
+/* ── SITE (왼쪽) ── */
+.site{width:440px;flex-shrink:0;background:#0a0a0a;position:relative;}
+.s-nav{display:flex;justify-content:space-between;align-items:center;padding:9px 18px;background:#0a0a0a;border-bottom:0.5px solid #1e1e1e;}
+.s-logo{font-size:12px;font-weight:900;color:#fff;letter-spacing:.18em;}
+.s-navlinks{display:flex;gap:12px;}
+.s-navlinks span{font-size:8px;color:#666;}
+.s-icons{display:flex;gap:8px;}
+.s-icons i{font-size:13px;color:#555;}
+.s-hero{display:flex;align-items:center;padding:0 18px;height:160px;position:relative;overflow:hidden;}
+.s-blob{position:absolute;border-radius:50%;opacity:.12;}
+.b1{width:200px;height:200px;background:#ff6b00;top:-60px;left:80px;}
+.b2{width:160px;height:160px;background:#c800ff;top:-30px;left:160px;}
+.s-hero-left{flex:1;position:relative;z-index:2;}
+.s-h1{font-size:28px;font-weight:900;color:#fff;line-height:.9;letter-spacing:-1px;}
+.s-h1 span{color:transparent;-webkit-text-stroke:1px #fff;}
+.s-sub{font-size:8px;color:#444;margin-top:8px;}
+.s-cta{display:inline-block;margin-top:10px;padding:7px 16px;background:#fff;color:#000;font-size:8px;font-weight:700;letter-spacing:.08em;border-radius:3px;}
+.s-shoe{font-size:80px;position:relative;z-index:2;}
+.s-catbar{display:flex;gap:5px;padding:8px 18px;background:#111;border-bottom:0.5px solid #1e1e1e;}
+.s-cat{font-size:7px;padding:3px 10px;border-radius:20px;font-weight:600;}
+.s-cat.on{background:#fff;color:#000;}
+.s-cat.off{background:#1e1e1e;color:#666;}
+.s-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#111;margin:0 18px;border-radius:6px;overflow:hidden;}
+.s-card{background:#0d0d0d;padding:0;}
+.s-top-line{height:1.5px;}
+.s-img{height:80px;display:flex;align-items:center;justify-content:center;}
+.s-img.c1{background:#140a00;}.s-img.c2{background:#0d0014;}
+.s-img.c3{background:#00001a;}.s-img.c4{background:#001408;}
+.s-img .sh{font-size:36px;}
+.s-info{padding:8px 10px 4px;}
+.s-brand{font-size:7px;color:#444;letter-spacing:.1em;font-weight:600;}
+.s-name{font-size:9px;color:#fff;font-weight:700;margin-top:2px;}
+.s-price{font-size:11px;color:#fff;font-weight:800;margin-top:3px;}
+.s-btn{display:block;margin:5px 10px 10px;padding:5px;text-align:center;font-size:7px;font-weight:700;border-radius:3px;cursor:pointer;}
+.s-btn.w{background:#fff;color:#000;}
+.s-btn.g{background:transparent;color:#444;border:0.5px solid #2a2a2a;}
+
+/* ── 말풍선 패널 (오른쪽) ── */
+.bubbles{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:14px 16px;gap:10px;background:#0f0f0f;border-left:0.5px solid #1e1e1e;}
+.step-group{display:flex;flex-direction:column;gap:5px;}
+.step-label{font-size:7px;font-weight:700;letter-spacing:.14em;padding:2px 8px;border-radius:10px;display:inline-flex;align-items:center;gap:4px;align-self:flex-start;}
+.sl-emotion{background:#26215C;color:#AFA9EC;}
+.sl-empathy{background:#04342C;color:#5DCAA5;}
+.sl-expect{background:#412402;color:#EF9F27;}
+.sl-action{background:#4A1B0C;color:#F0997B;}
+.bubble{border-radius:12px;padding:9px 12px;font-size:10px;line-height:1.55;position:relative;}
+.bubble b{font-weight:700;}
+.bbl-emotion{background:#1a1830;border:0.5px solid #3C3489;color:#AFA9EC;}
+.bbl-empathy{background:#0a1e16;border:0.5px solid #085041;color:#5DCAA5;}
+.bbl-expect{background:#1e1200;border:0.5px solid #633806;color:#EF9F27;}
+.bbl-action{background:#1a0a04;border:0.5px solid #712B13;color:#F0997B;}
+.bubble::before{content:'';position:absolute;left:-7px;top:12px;width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;}
+.bbl-emotion::before{border-right:7px solid #3C3489;}
+.bbl-empathy::before{border-right:7px solid #085041;}
+.bbl-expect::before{border-right:7px solid #633806;}
+.bbl-action::before{border-right:7px solid #712B13;}
+.apply-tag{font-size:8px;font-weight:700;margin-top:5px;padding:3px 8px;border-radius:4px;display:inline-block;}
+.at-e{background:#3C3489;color:#CECBF6;}
+.at-em{background:#085041;color:#9FE1CB;}
+.at-ex{background:#633806;color:#FAC775;}
+.at-ac{background:#712B13;color:#F5C4B3;}
+.arrow-row{display:flex;align-items:center;gap:6px;padding:0 4px;}
+.arrow-line{flex:1;height:0.5px;background:#2a2a2a;}
+.arrow-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+</style>
+
+<div class="outer">
+
+  <!-- LEFT: 사이트 미리보기 -->
+  <div class="site">
+    <div class="s-nav">
+      <div class="s-logo">SOLE//HAUS</div>
+      <div class="s-navlinks"><span>컬렉션</span><span>브랜드</span><span>세일</span></div>
+      <div class="s-icons">
+        <i class="ti ti-search" aria-hidden="true"></i>
+        <i class="ti ti-shopping-bag" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div class="s-hero">
+      <div class="s-blob b1"></div>
+      <div class="s-blob b2"></div>
+      <div class="s-hero-left">
+        <div class="s-h1">WEAR<br><span>THE</span><br>FUTURE</div>
+        <div class="s-sub">당신의 발이 말하는 스타일</div>
+        <div class="s-cta">컬렉션 보기</div>
+      </div>
+      <div class="s-shoe">👟</div>
+    </div>
+    <div class="s-catbar">
+      <div class="s-cat on">ALL</div>
+      <div class="s-cat off">RUNNING</div>
+      <div class="s-cat off">STREET</div>
+      <div class="s-cat off">LUXURY</div>
+    </div>
+    <div style="height:10px;background:#0a0a0a;"></div>
+    <div class="s-grid">
+      <div class="s-card">
+        <div class="s-top-line" style="background:#ff6b00;"></div>
+        <div class="s-img c1"><div class="sh">👟</div></div>
+        <div class="s-info">
+          <div class="s-brand">NIKE</div>
+          <div class="s-name">Air Phantom Elite</div>
+          <div class="s-price">₩189,000</div>
+        </div>
+        <div class="s-btn w">장바구니</div>
+      </div>
+      <div class="s-card">
+        <div class="s-top-line" style="background:#c800ff;"></div>
+        <div class="s-img c2"><div class="sh">👟</div></div>
+        <div class="s-info">
+          <div class="s-brand">ADIDAS</div>
+          <div class="s-name">Ultra Neon X</div>
+          <div class="s-price">₩229,000</div>
+        </div>
+        <div class="s-btn w">장바구니</div>
+      </div>
+      <div class="s-card">
+        <div class="s-top-line" style="background:#0077ff;"></div>
+        <div class="s-img c3"><div class="sh">👟</div></div>
+        <div class="s-info">
+          <div class="s-brand">NEW BALANCE</div>
+          <div class="s-name">990 Infinite</div>
+          <div class="s-price">₩159,000</div>
+        </div>
+        <div class="s-btn g">장바구니</div>
+      </div>
+      <div class="s-card">
+        <div class="s-top-line" style="background:#00ff88;"></div>
+        <div class="s-img c4"><div class="sh">👟</div></div>
+        <div class="s-info">
+          <div class="s-brand">PUMA</div>
+          <div class="s-name">Nitro Blaze</div>
+          <div class="s-price">₩139,000</div>
+        </div>
+        <div class="s-btn g">장바구니</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: 말풍선 -->
+  <div class="bubbles">
+
+    <!-- 감정 -->
+    <div class="step-group">
+      <div class="step-label sl-emotion">01 감정</div>
+      <div class="bubble bbl-emotion">
+        유저는 멋진 신발을 보고 <b>감탄하지만 멈춥니다.</b><br>
+        "예쁘다" → 그리고 이탈.
+        <div class="apply-tag at-e">적용 → 히어로에 "지금 247명이 보고 있어요" 추가</div>
+      </div>
+    </div>
+
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <div class="arrow-dot" style="background:#3C3489;"></div>
+      <div class="arrow-dot" style="background:#085041;"></div>
+      <div class="arrow-line"></div>
+    </div>
+
+    <!-- 공감 -->
+    <div class="step-group">
+      <div class="step-label sl-empathy">02 공감</div>
+      <div class="bubble bbl-empathy">
+        <b>"나만 이 신발을 못 사는 건 아닐까?"</b><br>
+        다른 사람도 사고 있다는 걸 보여줘야 합니다.
+        <div class="apply-tag at-em">적용 → 재고 소진 바 + "베스트셀러 1위" 리본</div>
+      </div>
+    </div>
+
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <div class="arrow-dot" style="background:#085041;"></div>
+      <div class="arrow-dot" style="background:#633806;"></div>
+      <div class="arrow-line"></div>
+    </div>
+
+    <!-- 기대 -->
+    <div class="step-group">
+      <div class="step-label sl-expect">03 기대</div>
+      <div class="bubble bbl-expect">
+        <b>"오늘만 이 가격이라면 지금 사야 하나?"</b><br>
+        시간 제한이 생기면 기대감이 행동으로 바뀝니다.
+        <div class="apply-tag at-ex">적용 → 카운트다운 타이머 + 할인 전 가격 노출</div>
+      </div>
+    </div>
+
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <div class="arrow-dot" style="background:#633806;"></div>
+      <div class="arrow-dot" style="background:#712B13;"></div>
+      <div class="arrow-line"></div>
+    </div>
+
+    <!-- 행동 -->
+    <div class="step-group">
+      <div class="step-label sl-action">04 행동</div>
+      <div class="bubble bbl-action">
+        <b>"지금 구매하기"</b> 버튼이 눈에 띄어야 합니다.<br>
+        다음 행동을 명확하게 설계해야 클릭이 일어납니다.
+        <div class="apply-tag at-ac">적용 → CTA 위계 분리 + 무료배송·반품 신뢰 태그</div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -66,7 +66,7 @@ const preview = {
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <div style={{ width: '100%', paddingTop: '40px' }}>
-          <Story />
+          {Story()}
         </div>
       </ThemeProvider>
     ),

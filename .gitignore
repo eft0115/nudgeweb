@@ -26,3 +26,7 @@ CLAUDE.local.md
 *.sln
 *.sw?
 storybook-static
+
+# Local verification screenshots
+white-screen-debug*.png
+hero-portfolio-preview.png

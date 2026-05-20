@@ -1,0 +1,317 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Helvetica Neue',Arial,sans-serif;}
+.site{width:1080px;background:#0a0a0a;max-height:400px;overflow-y:auto;}
+
+.topbar{background:#ff3b30;padding:5px 32px;display:flex;justify-content:space-between;align-items:center;}
+.topbar span{font-size:9px;color:#fff;font-weight:700;letter-spacing:.06em;}
+
+.nav{display:flex;justify-content:space-between;align-items:center;padding:10px 32px;background:#0a0a0a;border-bottom:0.5px solid #1e1e1e;}
+.logo{font-size:16px;font-weight:900;color:#fff;letter-spacing:.2em;}
+.nav-mid{display:flex;align-items:center;gap:10px;}
+.flash-badge{background:#ff3b30;color:#fff;font-size:8px;font-weight:800;padding:3px 9px;border-radius:3px;letter-spacing:.08em;}
+.timer-box{display:flex;align-items:center;gap:6px;background:#1a1a1a;border:0.5px solid #2a2a2a;border-radius:4px;padding:4px 10px;}
+.timer-lbl{font-size:8px;color:#555;}
+.timer-val{font-size:13px;font-weight:800;color:#ff3b30;font-variant-numeric:tabular-nums;}
+.nav-icons{display:flex;gap:14px;}
+.nav-icons i{font-size:17px;color:#555;cursor:pointer;}
+
+.body{display:flex;height:auto;}
+
+/* LEFT HERO PANEL */
+.left{width:380px;flex-shrink:0;background:#0d0d0d;border-right:0.5px solid #1a1a1a;display:flex;flex-direction:column;padding:28px 28px 20px;position:relative;overflow:hidden;}
+.hero-blob{position:absolute;border-radius:50%;opacity:.13;}
+.b1{width:300px;height:300px;background:#ff6b00;top:-80px;left:-60px;}
+.b2{width:200px;height:200px;background:#c800ff;top:20px;left:80px;}
+.hero-eyebrow{font-size:8px;color:#ff6b00;letter-spacing:.22em;font-weight:700;position:relative;z-index:2;}
+.hero-h1{font-size:48px;font-weight:900;color:#fff;line-height:.92;letter-spacing:-2px;margin-top:10px;position:relative;z-index:2;}
+.hero-h1 .ol{color:transparent;-webkit-text-stroke:1.5px #fff;}
+.hero-shoe{font-size:110px;line-height:1;text-align:center;margin:14px 0 6px;position:relative;z-index:2;}
+.social-row{display:flex;align-items:center;gap:8px;margin-top:4px;position:relative;z-index:2;}
+.avs{display:flex;}
+.av{width:18px;height:18px;border-radius:50%;border:2px solid #0d0d0d;margin-right:-5px;font-size:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;}
+.av1{background:#5DCAA5;}.av2{background:#7F77DD;}.av3{background:#EF9F27;}.av4{background:#D4537E;}
+.social-txt{font-size:9px;color:#555;margin-left:8px;}
+.social-txt b{color:#bbb;}
+.hero-sub{font-size:10px;color:#444;line-height:1.6;margin-top:10px;position:relative;z-index:2;}
+.hero-cta-col{display:flex;flex-direction:column;gap:8px;margin-top:16px;position:relative;z-index:2;}
+.cta-main{padding:11px;text-align:center;background:#ff6b00;color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;border-radius:4px;cursor:pointer;}
+.cta-ghost{padding:9px;text-align:center;background:transparent;color:#555;font-size:10px;border:0.5px solid #2a2a2a;border-radius:4px;cursor:pointer;}
+.trust-col{display:flex;gap:12px;margin-top:16px;position:relative;z-index:2;}
+.trust-item{display:flex;align-items:center;gap:4px;}
+.trust-item i{font-size:12px;color:#444;}
+.trust-item span{font-size:8px;color:#444;}
+
+/* RIGHT PRODUCT PANEL */
+.right{flex:1;background:#0a0a0a;overflow-y:auto;max-height:352px;}
+.sec-header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 10px;}
+.sec-title{font-size:9px;color:#444;letter-spacing:.18em;font-weight:600;}
+.sec-badge{font-size:8px;color:#ff6b00;font-weight:700;background:#1a1a1a;border:0.5px solid #2a2a2a;padding:3px 8px;border-radius:3px;}
+
+.prod-list{display:flex;flex-direction:column;gap:1px;background:#111;margin:0 16px;border-radius:8px;overflow:hidden;}
+.prod-row{display:flex;align-items:center;background:#0d0d0d;padding:10px 14px;gap:14px;position:relative;}
+.prod-row.featured{background:#111;border-left:3px solid #ff6b00;}
+.feat-label{position:absolute;top:0;left:3px;background:#ff6b00;color:#fff;font-size:7px;font-weight:800;padding:2px 7px;letter-spacing:.06em;}
+.prod-img{width:72px;height:72px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pi1{background:#140a00;}.pi2{background:#0d0014;}.pi3{background:#00001a;}.pi4{background:#001408;}
+.pi5{background:#1a0808;}.pi6{background:#080d1a;}.pi7{background:#0d1a08;}
+.prod-img .sh{font-size:36px;}
+.prod-info{flex:1;min-width:0;}
+.prod-brand{font-size:8px;color:#444;letter-spacing:.1em;font-weight:600;}
+.prod-name{font-size:12px;color:#fff;font-weight:700;margin-top:2px;}
+.prod-price-row{display:flex;align-items:center;gap:6px;margin-top:5px;}
+.p-now{font-size:14px;color:#fff;font-weight:800;}
+.p-was{font-size:10px;color:#333;text-decoration:line-through;}
+.p-disc{font-size:9px;color:#ff6b00;font-weight:800;}
+.prod-bar-area{width:130px;flex-shrink:0;}
+.prod-bar-lbl{font-size:7px;color:#444;margin-bottom:3px;}
+.prod-bar-bg{height:3px;background:#1e1e1e;border-radius:2px;}
+.prod-bar-fill{height:3px;border-radius:2px;}
+.f-hot{background:#ff3b30;}.f-mid{background:#EF9F27;}.f-low{background:#5DCAA5;}
+.stock-tag{font-size:7px;color:#ff3b30;font-weight:700;margin-top:4px;}
+.prod-btn-area{width:90px;flex-shrink:0;text-align:center;}
+.prod-btn{display:block;padding:8px 0;font-size:9px;font-weight:800;letter-spacing:.05em;border-radius:4px;cursor:pointer;}
+.pb-orange{background:#ff6b00;color:#fff;}
+.pb-ghost{background:transparent;color:#555;border:0.5px solid #2a2a2a;}
+
+.footer{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-top:0.5px solid #1a1a1a;margin-top:2px;}
+.footer-logo{font-size:11px;font-weight:800;color:#2a2a2a;letter-spacing:.12em;}
+.footer-links{display:flex;gap:14px;}
+.footer-links a{font-size:9px;color:#2a2a2a;text-decoration:none;cursor:pointer;}
+.footer-sns{display:flex;gap:10px;}
+.footer-sns i{font-size:14px;color:#2a2a2a;}
+</style>
+
+<h2 class="sr-only">SOLE//HAUS 넛지 디자인 적용 — 좌우 분할 레이아웃</h2>
+
+<div class="site">
+
+  <div class="topbar">
+    <span>⚡ 오늘 자정까지만 — 전 상품 특별가 적용중</span>
+    <span>지금 구매시 무료배송 + 30일 무료반품</span>
+  </div>
+
+  <nav class="nav">
+    <div class="logo">SOLE//HAUS</div>
+    <div class="nav-mid">
+      <div class="flash-badge">FLASH SALE</div>
+      <div class="timer-box">
+        <span class="timer-lbl">종료까지</span>
+        <span class="timer-val" id="t">02:47:13</span>
+      </div>
+    </div>
+    <div class="nav-icons">
+      <i class="ti ti-search" aria-hidden="true"></i>
+      <i class="ti ti-heart" aria-hidden="true"></i>
+      <i class="ti ti-shopping-bag" aria-hidden="true"></i>
+      <i class="ti ti-user" aria-hidden="true"></i>
+    </div>
+  </nav>
+
+  <div class="body">
+
+    <!-- LEFT: HERO -->
+    <div class="left">
+      <div class="hero-blob b1"></div>
+      <div class="hero-blob b2"></div>
+      <div class="hero-eyebrow">FLASH SALE · SS 2026</div>
+      <div class="hero-h1">WEAR<br><span class="ol">THE</span><br>FUTURE</div>
+      <div class="hero-shoe">👟</div>
+      <div class="social-row">
+        <div class="avs">
+          <div class="av av1">K</div>
+          <div class="av av2">J</div>
+          <div class="av av3">M</div>
+          <div class="av av4">S</div>
+        </div>
+        <span class="social-txt"><b>지금 487명</b>이 보고 있어요</span>
+      </div>
+      <div class="hero-sub">오늘만 최대 30% 할인.<br>재고 소진 시 특가 즉시 종료.</div>
+      <div class="hero-cta-col">
+        <div class="cta-main">지금 구매하기</div>
+        <div class="cta-ghost">전체 컬렉션 보기</div>
+      </div>
+      <div class="trust-col">
+        <div class="trust-item"><i class="ti ti-truck" aria-hidden="true"></i><span>무료배송</span></div>
+        <div class="trust-item"><i class="ti ti-refresh" aria-hidden="true"></i><span>30일 반품</span></div>
+        <div class="trust-item"><i class="ti ti-lock" aria-hidden="true"></i><span>안전결제</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: PRODUCT LIST -->
+    <div class="right">
+      <div class="sec-header">
+        <span class="sec-title">BEST PRODUCTS</span>
+        <span class="sec-badge">🔥 빠르게 소진중</span>
+      </div>
+
+      <div class="prod-list">
+
+        <div class="prod-row featured">
+          <div class="feat-label">🏆 베스트 1위</div>
+          <div style="width:6px;"></div>
+          <div class="prod-img pi1"><div class="sh">👟</div></div>
+          <div class="prod-info">
+            <div class="prod-brand">NIKE</div>
+            <div class="prod-name">Air Phantom Elite</div>
+            <div class="prod-price-row">
+              <span class="p-now">₩139,000</span>
+              <span class="p-was">189,000</span>
+              <span class="p-disc">-26%</span>
+            </div>
+          </div>
+          <div class="prod-bar-area">
+            <div class="prod-bar-lbl">재고 94% 소진</div>
+            <div class="prod-bar-bg"><div class="prod-bar-fill f-hot" style="width:94%"></div></div>
+            <div class="stock-tag">⚠ 2개 남음</div>
+          </div>
+          <div class="prod-btn-area">
+            <div class="prod-btn pb-orange">지금 구매</div>
+          </div>
+        </div>
+
+        <div class="prod-row">
+          <div class="prod-img pi2"><div class="sh">👟</div></div>
+          <div class="prod-info">
+            <div class="prod-brand">ADIDAS</div>
+            <div class="prod-name">Ultra Neon X</div>
+            <div class="prod-price-row">
+              <span class="p-now">₩169,000</span>
+              <span class="p-was">229,000</span>
+              <span class="p-disc">-26%</span>
+            </div>
+          </div>
+          <div class="prod-bar-area">
+            <div class="prod-bar-lbl">재고 68% 소진</div>
+            <div class="prod-bar-bg"><div class="prod-bar-fill f-mid" style="width:68%"></div></div>
+            <div class="stock-tag" style="color:#EF9F27;">7개 남음</div>
+          </div>
+          <div class="prod-btn-area">
+            <div class="prod-btn pb-ghost">장바구니</div>
+          </div>
+        </div>
+
+        <div class="prod-row">
+          <div class="prod-img pi3"><div class="sh">👟</div></div>
+          <div class="prod-info">
+            <div class="prod-brand">NEW BALANCE</div>
+            <div class="prod-name">990 Infinite Blue</div>
+            <div class="prod-price-row">
+              <span class="p-now">₩119,000</span>
+              <span class="p-was">159,000</span>
+              <span class="p-disc">-25%</span>
+            </div>
+          </div>
+          <div class="prod-bar-area">
+            <div class="prod-bar-lbl">재고 43% 소진</div>
+            <div class="prod-bar-bg"><div class="prod-bar-fill f-low" style="width:43%"></div></div>
+          </div>
+          <div class="prod-btn-area">
+            <div class="prod-btn pb-ghost">장바구니</div>
+          </div>
+        </div>
+
+        <div class="prod-row">
+          <div class="prod-img pi4"><div class="sh">👟</div></div>
+          <div class="prod-info">
+            <div class="prod-brand">PUMA</div>
+            <div class="prod-name">Nitro Blaze Pro</div>
+            <div class="prod-price-row">
+              <span class="p-now">₩99,000</span>
+              <span class="p-was">139,000</span>
+              <span class="p-disc">-28%</span>
+            </div>
+          </div>
+          <div class="prod-bar-area">
+            <div class="prod-bar-lbl">재고 31% 소진</div>
+            <div class="prod-bar-bg"><div class="prod-bar-fill f-low" style="width:31%"></div></div>
+          </div>
+          <div class="prod-btn-area">
+            <div class="prod-btn pb-ghost">장바구니</div>
+          </div>
+        </div>
+
+        <div class="prod-row">
+          <div class="prod-img pi5"><div class="sh">👟</div></div>
+          <div class="prod-info">
+            <div class="prod-brand">JORDAN</div>
+            <div class="prod-name">Air Jordan Retro X</div>
+            <div class="prod-price-row">
+              <span class="p-now">₩209,000</span>
+              <span class="p-was">279,000</span>
+              <span class="p-disc">-25%</span>
+            </div>
+          </div>
+          <div class="prod-bar-area">
+            <div class="prod-bar-lbl">재고 81% 소진</div>
+            <div class="prod-bar-bg"><div class="prod-bar-fill f-hot" style="width:81%"></div></div>
+            <div class="stock-tag">⚠ 5개 남음</div>
+          </div>
+          <div class="prod-btn-area">
+            <div class="prod-btn pb-orange">지금 구매</div>
+          </div>
+        </div>
+
+        <div class="prod-row">
+          <div class="prod-img pi6"><div class="sh">👟</div></div>
+          <div class="prod-info">
+            <div class="prod-brand">ASICS</div>
+            <div class="prod-name">Gel-Quantum Pulse</div>
+            <div class="prod-price-row">
+              <span class="p-now">₩109,000</span>
+              <span class="p-was">149,000</span>
+              <span class="p-disc">-26%</span>
+            </div>
+          </div>
+          <div class="prod-bar-area">
+            <div class="prod-bar-lbl">재고 55% 소진</div>
+            <div class="prod-bar-bg"><div class="prod-bar-fill f-mid" style="width:55%"></div></div>
+          </div>
+          <div class="prod-btn-area">
+            <div class="prod-btn pb-ghost">장바구니</div>
+          </div>
+        </div>
+
+        <div class="prod-row">
+          <div class="prod-img pi7"><div class="sh">👟</div></div>
+          <div class="prod-info">
+            <div class="prod-brand">ON RUNNING</div>
+            <div class="prod-name">Cloudmonster 2</div>
+            <div class="prod-price-row">
+              <span class="p-now">₩159,000</span>
+              <span class="p-was">219,000</span>
+              <span class="p-disc">-27%</span>
+            </div>
+          </div>
+          <div class="prod-bar-area">
+            <div class="prod-bar-lbl">재고 38% 소진</div>
+            <div class="prod-bar-bg"><div class="prod-bar-fill f-low" style="width:38%"></div></div>
+          </div>
+          <div class="prod-btn-area">
+            <div class="prod-btn pb-ghost">장바구니</div>
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="footer">
+        <div class="footer-logo">SOLE//HAUS</div>
+        <div class="footer-links">
+          <a>이용약관</a><a>개인정보처리방침</a><a>고객센터</a>
+        </div>
+        <div class="footer-sns">
+          <i class="ti ti-brand-instagram" aria-hidden="true"></i>
+          <i class="ti ti-brand-x" aria-hidden="true"></i>
+          <i class="ti ti-brand-youtube" aria-hidden="true"></i>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<script>
+let s=2*3600+47*60+13;
+const el=document.getElementById('t');
+function fmt(t){const h=String(Math.floor(t/3600)).padStart(2,'0'),m=String(Math.floor((t%3600)/60)).padStart(2,'0'),ss=String(t%60).padStart(2,'0');return h+':'+m+':'+ss;}
+setInterval(()=>{if(s>0){s--;el.textContent=fmt(s);}},1000);
+</script>

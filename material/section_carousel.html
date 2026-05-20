@@ -1,0 +1,148 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Helvetica Neue',Arial,sans-serif;}
+.carousel{width:100%;background:#fdf8f2;border-radius:20px;overflow:hidden;padding:0;}
+.slides{position:relative;}
+.slide{display:none;min-height:320px;}
+.slide.active{display:flex;}
+
+.slide-inner{width:100%;display:flex;align-items:stretch;}
+
+.img-side{flex:0 0 38%;display:flex;align-items:flex-end;justify-content:center;padding:20px 0 0;background:#fdf8f2;position:relative;}
+.img-side img{width:90%;max-height:260px;object-fit:contain;}
+
+.text-side{flex:1;display:flex;flex-direction:column;justify-content:center;padding:36px 36px 36px 28px;background:#ffffff;}
+.text-side.left-img{padding:36px 28px 36px 36px;}
+
+.step-num{font-size:52px;font-weight:900;line-height:1;background:linear-gradient(135deg,#e18c37,#f5c97a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
+.step-title{font-size:16px;font-weight:700;color:#e18c37;margin-bottom:14px;line-height:1.4;}
+.divider{width:36px;height:2.5px;border-radius:2px;background:linear-gradient(90deg,#e18c37,#f5c97a);margin-bottom:16px;}
+.step-desc{font-size:12.5px;color:#444;line-height:1.85;}
+.step-desc br{display:block;margin-top:6px;}
+
+.nav{display:flex;align-items:center;justify-content:center;gap:16px;padding:18px 0 22px;background:#fdf8f2;}
+.dot{width:8px;height:8px;border-radius:50%;background:#e8d5b8;cursor:pointer;transition:all .25s;}
+.dot.on{width:24px;border-radius:4px;background:#e18c37;}
+.nav-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid #e8d5b8;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#e18c37;font-size:16px;transition:all .2s;}
+.nav-btn:hover{background:#fdf3e3;border-color:#e18c37;}
+
+.slide-1 .img-side{order:1;} .slide-1 .text-side{order:2;}
+.slide-2 .img-side{order:2;} .slide-2 .text-side{order:1;}
+.slide-3 .img-side{order:1;} .slide-3 .text-side{order:2;}
+.slide-4 .img-side{order:2;} .slide-4 .text-side{order:1;}
+</style>
+
+<h2 class="sr-only">고객 감정 파악부터 행동까지 4단계 스토리 캐러셀</h2>
+
+<div class="carousel">
+  <div class="slides">
+
+    <div class="slide slide-1 active">
+      <div class="slide-inner">
+        <div class="img-side">
+          <img src="/mnt/user-data/uploads/2-removebg.png" alt="신나서 두 팔 벌린 땅콩 캐릭터">
+        </div>
+        <div class="text-side">
+          <div class="step-num">1.</div>
+          <div class="step-title">고객의 감정을 파악하기!</div>
+          <div class="divider"></div>
+          <div class="step-desc">
+            사업의 성공은 고객의 관심을 이끌어 내야하고<br>
+            고객의 관심은 무의식적인 행동패턴을 가져오는 것입니다.<br><br>
+            신기하게도, 이는 웹페이지에서도 똑같이 적용이 되며<br>
+            웹페이지의 관심은 결국 매출로 가는 첫 걸음이 됩니다.<br><br>
+            그 시작은, 고객의 감정이 무엇인지 파악하여 공유해야 하며<br>
+            이러한 무의식적인 관심을 끌어내도록 웹페이지는 디자인되어야 합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide slide-2">
+      <div class="slide-inner">
+        <div class="text-side left-img">
+          <div class="step-num">2.</div>
+          <div class="step-title">고객의 문제에 공감하기!</div>
+          <div class="divider"></div>
+          <div class="step-desc">
+            고객의 감정을 파악하여 공유를 하게 되면<br>
+            고객은 홀린 듯 관심을 보이기 시작합니다.<br><br>
+            이 때, 이 감정을 진심으로 이해하고<br>
+            감정의 원인을 알아준다면, 고객은 더욱 더<br>
+            나도 모르게 사장님의 브랜드에 관심을 가지게 됩니다.<br><br>
+            감정을 공감하는 웹디자인이 고객의 마음을 얻습니다.
+          </div>
+        </div>
+        <div class="img-side">
+          <img src="/mnt/user-data/uploads/3-removebg-preview.png" alt="큰 땅콩이 작은 땅콩을 공감해주는 장면">
+        </div>
+      </div>
+    </div>
+
+    <div class="slide slide-3">
+      <div class="slide-inner">
+        <div class="img-side">
+          <img src="/mnt/user-data/uploads/webnudge_logo.png" alt="손가락으로 가리키는 땅콩 캐릭터">
+        </div>
+        <div class="text-side">
+          <div class="step-num">3.</div>
+          <div class="step-title">고객에게 해결책을 주고 기대하게 만들기!</div>
+          <div class="divider"></div>
+          <div class="step-desc">
+            고객의 감정을 알아차리고, 고객의 감정에 공감을 해주게 된다면<br>
+            이제 사장님은 신뢰를 얻습니다.<br><br>
+            이 때, 고객에게 문제의 해결책을 제시하고<br>
+            기대하게 만든다면 결제의 단계로 나아갈 준비가 된 것입니다.<br><br>
+            이 순서를 웹페이지 디자인에 녹여내야합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide slide-4">
+      <div class="slide-inner">
+        <div class="text-side left-img">
+          <div class="step-num">4.</div>
+          <div class="step-title">고객을 행동하게 만들기!</div>
+          <div class="divider"></div>
+          <div class="step-desc">
+            고객의 감정 → 공감 → 기대까지 얻어냈다면<br>
+            마지막으로 고객이 행동하게끔 만들어야합니다.<br><br>
+            고객의 행동은 사장님의 입장에서는<br>
+            매출과 이익과 연결됩니다. 곧, 수익이죠!<br><br>
+            이러한 행동을 이끌어 내는 순차적 디자인이어야<br>
+            사업의 성공으로 갈 수 있습니다.
+          </div>
+        </div>
+        <div class="img-side">
+          <img src="/mnt/user-data/uploads/action.png" alt="계산대에서 결제하는 땅콩 캐릭터">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn" onclick="move(-1)" aria-label="이전">&#8592;</button>
+    <div class="dot on" onclick="go(0)"></div>
+    <div class="dot" onclick="go(1)"></div>
+    <div class="dot" onclick="go(2)"></div>
+    <div class="dot" onclick="go(3)"></div>
+    <button class="nav-btn" onclick="move(1)" aria-label="다음">&#8594;</button>
+  </div>
+</div>
+
+<script>
+let cur=0;
+const slides=document.querySelectorAll('.slide');
+const dots=document.querySelectorAll('.dot');
+function show(n){
+  slides[cur].classList.remove('active');
+  dots[cur].classList.remove('on');
+  cur=(n+4)%4;
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('on');
+}
+function go(n){show(n);}
+function move(d){show(cur+d);}
+</script>

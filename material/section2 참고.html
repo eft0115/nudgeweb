@@ -1,0 +1,110 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.wrap{display:flex;justify-content:space-between;padding:1.5rem 0;width:100%;}
+.card{width:31%;background:#ffffff;border:0.5px solid #f0dfc0;border-radius:14px;padding:26px 22px 22px;display:flex;flex-direction:column;font-family:'Helvetica Neue',Arial,sans-serif;}
+.num-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;background:#fdf3e3;color:#b36e1e;}
+.num-line{flex:1;height:0.5px;background:#f0dfc0;}
+.icon-wrap{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;background:#fdf3e3;}
+.prob-label{font-size:9px;font-weight:700;letter-spacing:.14em;margin-bottom:7px;color:#e18c37;}
+.card-title{font-size:14px;font-weight:700;color:#111;line-height:1.35;margin-bottom:10px;}
+.divider{width:28px;height:2px;border-radius:2px;margin-bottom:13px;background:#e18c37;}
+.card-desc{font-size:12px;color:#666;line-height:1.75;flex:1;}
+.card-desc b{color:#222;font-weight:700;}
+.bottom{margin-top:18px;padding-top:14px;border-top:0.5px solid #f0dfc0;}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;padding:5px 11px;border-radius:20px;background:#fdf3e3;color:#b36e1e;}
+</style>
+
+<h2 class="sr-only">넛지 디자인 없는 웹사이트의 3가지 문제점 카드</h2>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="num-row">
+      <div class="num">01</div>
+      <div class="num-line"></div>
+    </div>
+    <div class="icon-wrap">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="12" r="2.5" fill="#e18c37"/>
+        <line x1="14" y1="3" x2="14" y2="6" stroke="#e18c37" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="14" y1="18" x2="14" y2="21" stroke="#e18c37" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="5" y1="12" x2="8" y2="12" stroke="#e18c37" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="20" y1="12" x2="23" y2="12" stroke="#e18c37" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="7.5" y1="5.5" x2="9.6" y2="7.6" stroke="#e18c37" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="18.4" y1="16.4" x2="20.5" y2="18.5" stroke="#e18c37" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="20.5" y1="5.5" x2="18.4" y2="7.6" stroke="#e18c37" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="9.6" y1="16.4" x2="7.5" y2="18.5" stroke="#e18c37" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="7" cy="22" r="1" fill="#e18c37" opacity=".6"/>
+        <circle cx="21" cy="22" r="1" fill="#e18c37" opacity=".6"/>
+        <circle cx="14" cy="25" r="1" fill="#e18c37" opacity=".6"/>
+        <line x1="7" y1="20.8" x2="8.8" y2="17.8" stroke="#e18c37" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>
+        <line x1="21" y1="20.8" x2="19.2" y2="17.8" stroke="#e18c37" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>
+        <line x1="14" y1="23.8" x2="14" y2="20.8" stroke="#e18c37" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>
+      </svg>
+    </div>
+    <div class="prob-label">PROBLEM 1</div>
+    <div class="card-title">전문성은 보이지만,<br>문의가 거의 없습니다</div>
+    <div class="divider"></div>
+    <div class="card-desc">
+      예쁘고 화려한 디자인은 <b>감탄만 하고 끝납니다.</b><br>
+      보는 것에서 멈추고, 행동으로 이어지지 않습니다.
+    </div>
+    <div class="bottom">
+      <div class="tag">
+        <span style="font-size:11px;">★</span>
+        감탄 → 이탈
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num-row">
+      <div class="num">02</div>
+      <div class="num-line"></div>
+    </div>
+    <div class="icon-wrap">
+      <i class="ti ti-mood-smile" style="font-size:26px;color:#e18c37;" aria-hidden="true"></i>
+    </div>
+    <div class="prob-label">PROBLEM 2</div>
+    <div class="card-title">브랜드가 유저의<br>감정을 이해 못합니다</div>
+    <div class="divider"></div>
+    <div class="card-desc">
+      유저는 <b>공감받고 싶습니다.</b><br>
+      감정을 이해받아야만 다음 스텝으로 자연스럽게 넘어갈 수 있습니다.
+    </div>
+    <div class="bottom">
+      <div class="tag">
+        <i class="ti ti-arrow-right" style="font-size:12px;" aria-hidden="true"></i>
+        공감 없음 → 이탈
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num-row">
+      <div class="num">03</div>
+      <div class="num-line"></div>
+    </div>
+    <div class="icon-wrap">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <polygon points="7,4 25,14 7,24" fill="#e18c37" stroke="#e18c37" stroke-width="1" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="prob-label">PROBLEM 3</div>
+    <div class="card-title">CTA가 다음 행동으로<br>이어지지 않습니다</div>
+    <div class="divider"></div>
+    <div class="card-desc">
+      유저의 <b>다음 동작을 미리 설계</b>해야 합니다.<br>
+      그래야 다음 단계로 자연스럽게 넘어갈 수 있습니다.
+    </div>
+    <div class="bottom">
+      <div class="tag">
+        <i class="ti ti-arrow-right" style="font-size:12px;" aria-hidden="true"></i>
+        행동 설계 없음 → 이탈
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,154 @@
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .cf-root { font-family: var(--font-sans); padding: 2rem 0; max-width: 680px; margin: 0 auto; }
+  .cf-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+  .cf-header { background: linear-gradient(135deg, #F3904F 0%, #3B4371 100%); padding: 2rem 2rem 1.5rem; }
+  .cf-header-icon { width: 52px; height: 52px; background: rgba(255,255,255,0.15); border-radius: var(--border-radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; overflow: hidden; }
+  .cf-header-icon img { width: 48px; height: 48px; object-fit: contain; display: block; }
+  .cf-header h2 { font-size: 20px; font-weight: 500; color: #fff; margin-bottom: 4px; }
+  .cf-header p { font-size: 14px; color: rgba(255,255,255,0.8); }
+  .cf-body { padding: 1.75rem 2rem 2rem; display: flex; flex-direction: column; align-items: center; }
+  .cf-body > form { width: 100%; }
+  .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .cf-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
+  .cf-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); letter-spacing: 0.01em; }
+  .cf-label .req { color: #F3904F; margin-left: 2px; }
+  .cf-input, .cf-select, .cf-textarea {
+    width: 100%; padding: 9px 12px; font-size: 14px; font-family: var(--font-sans);
+    background: var(--color-background-secondary); color: var(--color-text-primary);
+    border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md);
+    outline: none; transition: border-color 0.15s;
+  }
+  .cf-input:focus, .cf-select:focus, .cf-textarea:focus { border-color: #3B4371; box-shadow: 0 0 0 3px rgba(59,67,113,0.12); }
+  .cf-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+  .cf-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 32px; }
+  .cf-consult-btn { width: 100%; padding: 10px 16px; font-size: 14px; font-family: var(--font-sans); font-weight: 500; background: var(--color-background-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .cf-consult-btn.active { background: rgba(59,67,113,0.08); color: #3B4371; border-color: #3B4371; }
+  .cf-consult-btn:hover { border-color: #3B4371; color: #3B4371; }
+  .cf-divider { width: 100%; border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
+  .cf-submit { width: 100%; padding: 12px; font-size: 15px; font-weight: 500; font-family: var(--font-sans); background: linear-gradient(135deg, #F3904F 0%, #3B4371 100%); color: #fff; border: none; border-radius: var(--border-radius-md); cursor: pointer; transition: opacity 0.15s, transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 1.5rem; }
+  .cf-submit:hover { opacity: 0.88; }
+  .cf-submit:active { transform: scale(0.99); }
+  .cf-success { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 2rem; text-align: center; gap: 1rem; }
+  .cf-success-icon { width: 56px; height: 56px; background: rgba(59,67,113,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .cf-success-icon i { font-size: 28px; color: #3B4371; }
+  .cf-success h3 { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+  .cf-success p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; max-width: 320px; }
+  @media (max-width: 480px) { .cf-row { grid-template-columns: 1fr; } .cf-header, .cf-body { padding-left: 1.25rem; padding-right: 1.25rem; } }
+</style>
+
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">웹 에이전시 문의하기 양식</h2>
+
+<div class="cf-root">
+  <div class="cf-card">
+    <div class="cf-header">
+      <div class="cf-header-icon"><img src="/material/2-removebg.png" alt="" aria-hidden="true"></div>
+      <h2>매출을 올릴 웹사이트 문의하기!</h2>
+      <p>목적 달성을 위한 웹페이지, 지금 바로 상담을 시작하세요.</p>
+    </div>
+
+    <div class="cf-body">
+      <hr class="cf-divider">
+
+      <form id="cf-form" novalidate>
+        <div class="cf-row">
+          <div class="cf-field">
+            <label class="cf-label" for="cf-name">이름<span class="req">*</span></label>
+            <input class="cf-input" id="cf-name" type="text" placeholder="홍길동" required>
+          </div>
+          <div class="cf-field">
+            <label class="cf-label" for="cf-company">회사명</label>
+            <input class="cf-input" id="cf-company" type="text" placeholder="회사명 또는 개인 2개 중에 하나 적기!">
+          </div>
+        </div>
+
+        <div class="cf-row">
+          <div class="cf-field">
+            <label class="cf-label" for="cf-email">이메일<span class="req">*</span></label>
+            <input class="cf-input" id="cf-email" type="email" placeholder="email@example.com" required>
+          </div>
+          <div class="cf-field">
+            <label class="cf-label" for="cf-phone">연락처<span class="req">*</span></label>
+            <input class="cf-input" id="cf-phone" type="tel" placeholder="010-0000-0000" required>
+          </div>
+        </div>
+
+        <div class="cf-field">
+          <label class="cf-label" for="cf-service">문의 서비스 유형</label>
+          <select class="cf-select" id="cf-service">
+            <option value="">선택해주세요</option>
+            <option>웹사이트 신규 구축</option>
+            <option>랜딩 페이지 제작</option>
+            <option>넛지 디자인 컨설팅</option>
+            <option>리뉴얼 / 리디자인</option>
+            <option>기타 문의</option>
+          </select>
+        </div>
+
+        <div class="cf-field">
+          <label class="cf-label">예상 예산</label>
+          <button type="button" class="cf-consult-btn" id="cf-consult" onclick="toggleConsult(this)">
+            <i class="ti ti-help-circle" style="font-size:16px;" aria-hidden="true"></i>
+            잘 모르겠지만, 상담을 원해요!
+          </button>
+        </div>
+
+        <div class="cf-field" style="margin-top:0.25rem;">
+          <label class="cf-label" for="cf-msg">문의 내용<span class="req">*</span></label>
+          <textarea class="cf-textarea" id="cf-msg" placeholder="프로젝트 목표, 일정, 참고 사이트 등을 자유롭게 적어주세요." required></textarea>
+        </div>
+
+        <button type="submit" class="cf-submit">
+          <i class="ti ti-send" aria-hidden="true"></i>
+          상담 신청하기
+        </button>
+      </form>
+
+      <div class="cf-success" id="cf-success">
+        <div class="cf-success-icon"><i class="ti ti-check" aria-hidden="true"></i></div>
+        <h3>문의가 접수되었습니다!</h3>
+        <p>빠른 시일 내에 담당자가 연락드릴 예정입니다.<br>평균 응답 시간은 영업일 기준 1일 이내입니다.</p>
+        <button type="button" class="cf-submit" style="max-width:200px;margin-top:0.5rem;" onclick="resetForm()">새 문의하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleConsult(btn) {
+    btn.classList.toggle('active');
+    if (btn.classList.contains('active')) {
+      btn.innerHTML = '<i class="ti ti-check" style="font-size:16px;" aria-hidden="true"></i> 상담 신청으로 진행할게요!';
+    } else {
+      btn.innerHTML = '<i class="ti ti-help-circle" style="font-size:16px;" aria-hidden="true"></i> 잘 모르겠지만, 상담을 원해요!';
+    }
+  }
+
+  document.getElementById('cf-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('cf-name').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const phone = document.getElementById('cf-phone').value.trim();
+    const msg = document.getElementById('cf-msg').value.trim();
+    if (!name || !email || !phone || !msg) {
+      [['cf-name', name], ['cf-email', email], ['cf-phone', phone], ['cf-msg', msg]].forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (!val) { el.style.borderColor = '#F3904F'; el.focus(); }
+        else el.style.borderColor = '';
+      });
+      return;
+    }
+    document.getElementById('cf-form').style.display = 'none';
+    document.getElementById('cf-success').style.display = 'flex';
+  });
+
+  function resetForm() {
+    document.getElementById('cf-form').reset();
+    const consult = document.getElementById('cf-consult');
+    consult.classList.remove('active');
+    consult.innerHTML = '<i class="ti ti-help-circle" style="font-size:16px;" aria-hidden="true"></i> 잘 모르겠지만, 상담을 원해요!';
+    document.getElementById('cf-form').style.display = 'block';
+    document.getElementById('cf-success').style.display = 'none';
+  }
+</script>
