@@ -25,11 +25,11 @@ import webnudgeWorryHover from '../../assets/brand/webnudge-worry-hover.png';
 import webnudgeSympathyHover from '../../../material/sympathy.png';
 import webnudgeAnticipateHover from '../../../material/2-removebg.png';
 import webnudgeActionHover from '../../../material/action.png';
-import webnudgeCarouselBg from '../../../material/bg.png';
+import webnudgeCarouselBg from '../../../material/bg.webp';
 import webnudgeJumpMascot from '../../../material/2-removebg.png';
 import webnudgeSympathyPair from '../../../material/3-removebg-preview.png';
 import webnudgeLogo from '../../../material/webnudge_logo.png';
-import webnudgeSectionBg from '../../../material/section.png';
+import webnudgeSectionBg from '../../../material/section.webp';
 import webnudgeSmallMascot from '../../../material/children-removebg-preview.png';
 import contactFormHtml from '../../../material/contact_form_web_agency.html?raw';
 import notNudgeExampleHtml from '../../../material/not_nudge.html?raw';
@@ -485,7 +485,7 @@ function TypewriterBrandName() {
         minWidth: '9.5ch',
         color: 'secondary.main',
         fontWeight: 900,
-        fontSize: '30px',
+        fontSize: { xs: 20, sm: 24, md: 30 },
         fontFamily: 'Outfit, "Pretendard Variable", Pretendard, system-ui, sans-serif',
         lineHeight: 1,
         overflow: 'visible',
@@ -510,7 +510,7 @@ function TypewriterBrandName() {
           display: 'inline-block',
           width: '100%',
           height: 35,
-          lineHeight: '35px',
+          lineHeight: { xs: '26px', sm: '30px', md: '35px' },
           overflow: 'hidden',
           whiteSpace: 'nowrap',
           pr: 0.5,
@@ -538,7 +538,7 @@ function TypewriterBrandName() {
           opacity: 0,
           whiteSpace: 'nowrap',
           color: 'secondary.main',
-          fontSize: 13,
+          fontSize: { xs: 11, md: 13 },
           fontWeight: 800,
           lineHeight: 1,
           pointerEvents: 'none',
@@ -744,16 +744,16 @@ function SiteHeader({ onHeroBackgroundChange, onContactOpen }) {
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          sx={{ minHeight: 72, gap: 2 }}
+          sx={{ minHeight: { xs: 64, md: 72 }, gap: { xs: 1, md: 2 } }}
         >
-          <Stack direction="row" spacing={1.25} alignItems="center">
+          <Stack direction="row" spacing={{ xs: 0.75, md: 1.25 }} alignItems="center" sx={{ minWidth: 0 }}>
             <Box
               component="a"
               href="/"
               aria-label="메인페이지로 이동"
               sx={{
-                width: { xs: 92, md: 116 },
-                height: { xs: 92, md: 116 },
+                width: { xs: 58, md: 116 },
+                height: { xs: 58, md: 116 },
                 display: 'grid',
                 placeItems: 'center',
                 overflow: 'hidden',
@@ -774,7 +774,7 @@ function SiteHeader({ onHeroBackgroundChange, onContactOpen }) {
               }}
             >
               <BrandMascot
-                size={{ xs: 92, md: 116 }}
+                size={{ xs: 58, md: 116 }}
                 alt="NudgeWeb logo"
                 sx={{
                   mixBlendMode: 'multiply',
@@ -984,6 +984,15 @@ function SiteHeader({ onHeroBackgroundChange, onContactOpen }) {
             {...homepageButtonProps}
             endIcon={<ArrowForwardIcon />}
             onClick={onContactOpen}
+            sx={{
+              flex: '0 0 auto',
+              minWidth: { xs: 112, sm: 132 },
+              px: { xs: 1.25, sm: 2 },
+              fontSize: { xs: 13, sm: 14 },
+              '& .MuiButton-endIcon': {
+                ml: { xs: 0.5, sm: 1 },
+              },
+            }}
           >
             프로젝트 상담
           </Button>
@@ -1118,6 +1127,14 @@ function HeroSection({
     return () => resizeObserver.disconnect();
   }, []);
 
+  useEffect(() => {
+    heroBackgroundImages.slice(1).forEach((image) => {
+      const preloadImage = new Image();
+      preloadImage.decoding = 'async';
+      preloadImage.src = image;
+    });
+  }, []);
+
   return (
     <Box
         component="section"
@@ -1126,12 +1143,27 @@ function HeroSection({
           bgcolor: '#FCFCF0',
           '--hero-rough-edge-height': { xs: '24px', md: '34px' },
           clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - var(--hero-rough-edge-height) * 0.46), 92% calc(100% - var(--hero-rough-edge-height) * 0.58), 84% calc(100% - var(--hero-rough-edge-height) * 0.36), 75% calc(100% - var(--hero-rough-edge-height) * 0.64), 66% calc(100% - var(--hero-rough-edge-height) * 0.40), 56% calc(100% - var(--hero-rough-edge-height) * 0.60), 47% calc(100% - var(--hero-rough-edge-height) * 0.32), 37% calc(100% - var(--hero-rough-edge-height) * 0.62), 28% calc(100% - var(--hero-rough-edge-height) * 0.42), 18% calc(100% - var(--hero-rough-edge-height) * 0.66), 9% calc(100% - var(--hero-rough-edge-height) * 0.44), 0 calc(100% - var(--hero-rough-edge-height) * 0.56))',
-        minHeight: { xs: 550, md: 'calc(100vh - 82px)' },
-        pt: { xs: 7, md: '160px' },
-        pb: { xs: 7, md: '128px' },
+        minHeight: { xs: 500, md: 'calc(100vh - 82px)' },
+        pt: { xs: 6, md: '160px' },
+        pb: { xs: 6, md: '128px' },
         px: 0,
       }}
     >
+      <Box
+        component="img"
+        src={heroBackgroundImages[0]}
+        alt=""
+        aria-hidden="true"
+        fetchPriority="high"
+        sx={{
+          position: 'absolute',
+          width: 1,
+          height: 1,
+          opacity: 0,
+          pointerEvents: 'none',
+          userSelect: 'none',
+        }}
+      />
       {heroBackgroundImages.map((image, index) => (
         <Box
           key={`${image}-${index}`}
@@ -1158,7 +1190,7 @@ function HeroSection({
         sx={{
           position: 'absolute',
           left: '50%',
-          bottom: { xs: 33, md: 39 },
+          bottom: { xs: 24, md: 39 },
           zIndex: 5,
           transform: 'translateX(-50%)',
           bgcolor: 'transparent',
@@ -1290,7 +1322,7 @@ function HeroSection({
               variant="h1"
               sx={{
                 maxWidth: 1503,
-                fontSize: { xs: 58, sm: 74, lg: 86 },
+                fontSize: { xs: 'clamp(40px, 11.8vw, 52px)', sm: 74, lg: 86 },
                 lineHeight: 1.14,
                 color: 'transparent',
                 backgroundImage: 'linear-gradient(90deg, #3C3B3F 0%, #605C3C 100%)',
@@ -1302,6 +1334,8 @@ function HeroSection({
                   display: 'block',
                   overflow: 'hidden',
                   whiteSpace: 'nowrap',
+                  width: '100%',
+                  maxWidth: '100%',
                   mt: '0.18em',
                   '&:first-of-type': {
                     mt: 0,
@@ -1425,7 +1459,7 @@ function HeroSection({
                 sx={{
                   width: heroSubtitleWidth ? `${heroSubtitleWidth}px` : 'auto',
                   maxWidth: '100%',
-                  fontSize: 'clamp(16px, 3.4vw, 26px)',
+                  fontSize: { xs: 16, sm: 20, md: 26 },
                   color: 'transparent',
                   backgroundImage: 'linear-gradient(90deg, #A43931 0%, #1D4350 100%)',
                 backgroundClip: 'text',
@@ -1433,7 +1467,7 @@ function HeroSection({
                 WebkitTextFillColor: 'transparent',
                   fontWeight: 700,
                   textAlign: 'center',
-                  whiteSpace: 'nowrap',
+                  whiteSpace: { xs: 'normal', sm: 'nowrap' },
                   mt: { xs: 4, md: 5 },
                   mb: { xs: 1.5, md: 2 },
                 }}
@@ -1448,7 +1482,7 @@ function HeroSection({
                 overflow: 'visible',
                 alignSelf: 'center',
                 width: '100%',
-                maxWidth: 502,
+                maxWidth: { xs: 'calc(100vw - 48px)', md: 502 },
                 minHeight: 50,
                 borderRadius: '5px',
                 mt: { xs: 1.5, md: 2 },
@@ -1919,9 +1953,9 @@ function NudgeStorySection({ activeStep, onStepChange }) {
           eyebrow="차이를 확인하세요!"
           eyebrowFontSize={18}
           eyebrowImage={webnudgeSympathyPair}
-          eyebrowImageSize={246}
-          eyebrowImageBottomOffset="calc(-0.18em - 20px)"
-          eyebrowImageTransform="translate(-20px, 5px)"
+          eyebrowImageSize={{ xs: 128, md: 246 }}
+          eyebrowImageBottomOffset={{ xs: 'calc(-0.18em - 8px)', md: 'calc(-0.18em - 20px)' }}
+          eyebrowImageTransform={{ xs: 'translate(-10px, 3px)', md: 'translate(-20px, 5px)' }}
           title="넛지시스템 적용 전 VS 후"
           description="넛지시스템을 접목한 웹사이트를 만들어보세요!"
           descriptionFontSize={18}
@@ -2033,7 +2067,7 @@ function NudgeStorySection({ activeStep, onStepChange }) {
             {previewHtml ? (
               <Box
                 sx={{
-                  height: isServicesStep ? { xs: 760, md: 700 } : { xs: 360, md: 430 },
+                  height: isServicesStep ? { xs: 620, md: 700 } : { xs: 360, md: 430 },
                   overflow: isServicesStep ? 'hidden' : 'auto',
                   borderRadius: 2,
                   border: '1px solid',
@@ -2056,9 +2090,9 @@ function NudgeStorySection({ activeStep, onStepChange }) {
                   srcDoc={previewHtml}
                   sx={{
                     display: 'block',
-                    width: isNudgeStep ? 940 : '100%',
+                    width: isNudgeStep ? { xs: '100%', md: 940 } : '100%',
                     minWidth: '100%',
-                    height: isNudgeStep ? 760 : isServicesStep ? '100%' : '100%',
+                    height: isNudgeStep ? { xs: 560, md: 760 } : isServicesStep ? '100%' : '100%',
                     minHeight: '100%',
                     border: 0,
                     bgcolor: isNudgeStep || isServicesStep ? '#ffffff' : '#0a0a0a',
@@ -2217,7 +2251,7 @@ function PortfolioSection() {
                       zIndex: 2,
                     }}
                   >
-                    넛지웹스튜디오
+                      넛지웹스튜디오
                   </Box>
                   <Box
                     component="img"
@@ -2225,14 +2259,14 @@ function PortfolioSection() {
                     alt=""
                     aria-hidden="true"
                     sx={{
-                      width: 150,
-                      height: 150,
+                      width: { xs: 96, md: 150 },
+                      height: { xs: 96, md: 150 },
                       objectFit: 'contain',
                       flex: '0 0 auto',
                       mb: '-0.22em',
                       position: 'relative',
                       zIndex: 1,
-                      transform: 'translate(-35px, 45px)',
+                      transform: { xs: 'translate(-20px, 28px)', md: 'translate(-35px, 45px)' },
                       mixBlendMode: 'normal',
                     }}
                   />
@@ -2252,7 +2286,7 @@ function PortfolioSection() {
 
           <Stack
             component="nav"
-            direction="row"
+            direction={{ xs: 'column', sm: 'row' }}
             spacing={1}
             sx={{
               justifySelf: { xs: 'stretch', md: 'end' },
@@ -2398,6 +2432,11 @@ function PortfolioSection() {
               sx={{
                 p: { xs: 3, lg: 4 },
                 pt: { xs: 0, lg: 4 },
+                flexWrap: 'wrap',
+                gap: 1,
+                '& .MuiButton-root': {
+                  flex: { xs: '1 1 150px', sm: '0 0 auto' },
+                },
               }}
             >
               <Box
@@ -2618,15 +2657,15 @@ function ContactSection() {
                     <Box component="span">결정을 할 시간!</Box>
                     <Box
                       component="img"
-                      src={webnudgeActionHover}
-                      alt=""
-                      aria-hidden="true"
-                      sx={{
-                        width: { xs: 212, sm: 262, md: 288 },
+                        src={webnudgeActionHover}
+                        alt=""
+                        aria-hidden="true"
+                        sx={{
+                        width: { xs: 150, sm: 220, md: 288 },
                           height: 'auto',
                           display: 'block',
                           borderRadius: 2,
-                          transform: { xs: 'translate(-28px, 18px)', sm: 'translate(-30px, 22px)', md: 'translate(-32px, 24px)' },
+                          transform: { xs: 'translate(-18px, 12px)', sm: 'translate(-30px, 22px)', md: 'translate(-32px, 24px)' },
                         }}
                       />
                   </Box>
@@ -2753,7 +2792,7 @@ function ContactSection() {
                   border: '2px solid transparent',
                   bgcolor: '#FFFFFF',
                   color: 'secondary.main',
-                    fontSize: { xs: 22, md: 30 },
+                    fontSize: { xs: 18, sm: 22, md: 30 },
                     fontWeight: 900,
                     boxShadow: '0 26px 70px rgba(0, 0, 0, 0.24)',
                     '&::before': {
@@ -2777,10 +2816,10 @@ function ContactSection() {
                     },
                       '& .contact-cta-peanut': {
                         position: 'absolute',
-                        left: { xs: 28, md: 42 },
-                        bottom: { xs: -16, md: -22 },
-                        width: { xs: 99, md: 132 },
-                        height: { xs: 99, md: 132 },
+                        left: { xs: 16, md: 42 },
+                        bottom: { xs: -12, md: -22 },
+                        width: { xs: 78, md: 132 },
+                        height: { xs: 78, md: 132 },
                         objectFit: 'contain',
                         opacity: 0,
                         zIndex: 3,
@@ -2881,19 +2920,20 @@ function SectionHeading({
   eyebrowFontSize,
   eyebrowImage,
   eyebrowImageAlt = '',
-  eyebrowImageSize = 264,
+  eyebrowImageSize = { xs: 96, md: 264 },
   eyebrowImageBottomOffset = '0.08em',
   eyebrowImageTransform,
   titleLineGap,
   descriptionFontSize = 21,
 }) {
   return (
-    <Stack spacing={1.5} sx={{ maxWidth: 860 }}>
+    <Stack spacing={1.5} sx={{ maxWidth: 860, minWidth: 0 }}>
       <Box
         sx={{
           display: 'inline-flex',
           alignItems: 'flex-end',
           gap: 0.75,
+          maxWidth: '100%',
           width: 'fit-content',
         }}
       >
@@ -2925,6 +2965,7 @@ function SectionHeading({
         variant="h2"
         sx={{
           fontSize: { xs: 36, md: 58 },
+          overflowWrap: 'break-word',
           lineHeight: titleLineGap ? `calc(1em + ${titleLineGap} + 10px)` : 'calc(1em + 10px)',
           color: isInverted ? 'common.white' : 'text.primary',
         }}
@@ -2934,7 +2975,12 @@ function SectionHeading({
       <Typography
         variant="body1"
         color={isInverted ? 'grey.300' : 'text.secondary'}
-        sx={{ fontSize: descriptionFontSize }}
+        sx={{
+          fontSize: typeof descriptionFontSize === 'number'
+            ? { xs: Math.min(descriptionFontSize, 17), md: descriptionFontSize }
+            : descriptionFontSize,
+          overflowWrap: 'break-word',
+        }}
       >
         {description}
       </Typography>
