@@ -417,6 +417,14 @@ const portfolioGroups = [
   },
 ];
 
+const getDefaultPortfolioShowcaseIndex = () => {
+  if (typeof window !== 'undefined' && window.matchMedia('(max-width: 599px)').matches) {
+    return 3;
+  }
+
+  return 0;
+};
+
 const navBackgroundTargets = {
   problem: 1,
   'nudge-story': 2,
@@ -2003,7 +2011,7 @@ function ProblemSection() {
       <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>
         <SectionHeading
           eyebrow="첫번째는 감정을 이해해야한다."
-          eyebrowFontSize={18}
+          eyebrowFontSize={{ xs: 16, md: 18 }}
           eyebrowImage={webnudgeWorryHover}
           eyebrowImageAlt=""
           sx={{ pl: { xs: 1.5, md: 2.5 } }}
@@ -2377,11 +2385,42 @@ function NudgeStorySection({ activeStep, onStepChange }) {
 }
 
 function PortfolioSection() {
-  const [activeShowcaseIndex, setActiveShowcaseIndex] = useState(0);
+  const [activeShowcaseIndex, setActiveShowcaseIndex] = useState(getDefaultPortfolioShowcaseIndex);
   const [openPortfolioGroupId, setOpenPortfolioGroupId] = useState(null);
   const [portfolioBurstId, setPortfolioBurstId] = useState(null);
+  const [isPortfolioChromeRevealed, setIsPortfolioChromeRevealed] = useState(false);
   const portfolioBurstCounterRef = useRef(0);
+  const portfolioChromeRef = useRef(null);
   const activeShowcase = portfolioShowcases[activeShowcaseIndex];
+
+  useEffect(() => {
+    const element = portfolioChromeRef.current;
+
+    if (!element) {
+      return undefined;
+    }
+
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (reducedMotionQuery.matches || typeof IntersectionObserver === 'undefined') {
+      setIsPortfolioChromeRevealed(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsPortfolioChromeRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.35 },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!portfolioBurstId) {
@@ -2489,6 +2528,22 @@ function PortfolioSection() {
       },
     },
   };
+
+  const portfolioChromeDotSx = (delayMs) => ({
+    opacity: { xs: 1, md: isPortfolioChromeRevealed ? 1 : 0 },
+    transform: {
+      xs: 'none',
+      md: isPortfolioChromeRevealed ? 'translateX(0)' : 'translateX(-18px)',
+    },
+    transition: 'opacity 520ms cubic-bezier(0.16, 1, 0.3, 1), transform 520ms cubic-bezier(0.16, 1, 0.3, 1)',
+    transitionDelay: { xs: '0ms', md: `${delayMs}ms` },
+    willChange: isPortfolioChromeRevealed ? 'auto' : 'opacity, transform',
+    '@media (prefers-reduced-motion: reduce)': {
+      opacity: 1,
+      transform: 'none',
+      transition: 'none',
+    },
+  });
 
   return (
     <Box
@@ -2706,6 +2761,7 @@ function PortfolioSection() {
               </Stack>
             </Box>
             <Stack
+              ref={portfolioChromeRef}
               direction="row"
               spacing={1}
               alignItems="center"
@@ -2727,6 +2783,7 @@ function PortfolioSection() {
                   height: 10,
                   borderRadius: '50%',
                   bgcolor: '#FF6B5F',
+                  ...portfolioChromeDotSx(0),
                 }}
               />
               <Box
@@ -2735,6 +2792,7 @@ function PortfolioSection() {
                   height: 10,
                   borderRadius: '50%',
                   bgcolor: '#F2C94C',
+                  ...portfolioChromeDotSx(130),
                 }}
               />
               <Box
@@ -2743,6 +2801,7 @@ function PortfolioSection() {
                   height: 10,
                   borderRadius: '50%',
                   bgcolor: '#5DCAA5',
+                  ...portfolioChromeDotSx(260),
                 }}
               />
               <Button
@@ -2828,14 +2887,16 @@ function FaqSection() {
                   lineHeight: 1,
                 }}
               >
-                <Box component="span" sx={{ lineHeight: 1 }}>FAQ</Box>
+                <Box component="span" sx={{ lineHeight: 1, position: 'relative', zIndex: 1 }}>FAQ</Box>
                 <BrandMascot
                   size={{ xs: 117, sm: 162 }}
                   alt=""
                   sx={{
                     flex: '0 0 auto',
                     mb: '-6px',
-                    transform: 'scaleX(-1) translate(-20px, 28px)',
+                    position: 'relative',
+                    zIndex: 3,
+                    transform: 'scaleX(-1) translate(0, 28px)',
                   }}
                 />
               </Box>
@@ -2874,22 +2935,25 @@ function FaqSection() {
                       minHeight: 64,
                       borderRadius: '0 0 18px 18px',
                     },
-                    '&:hover, &:focus-visible': {
-                      background: 'linear-gradient(135deg, #155799 0%, #159957 100%)',
-                      borderLeftColor: 'transparent',
-                      borderRightColor: 'transparent',
-                      borderBottomColor: 'transparent',
-                      color: '#FFFFFF',
-                    },
-                    '&:hover .MuiTypography-root, &:focus-visible .MuiTypography-root, &:hover .MuiSvgIcon-root, &:focus-visible .MuiSvgIcon-root': {
-                      color: '#FFFFFF',
+                    '@media (min-width:900px)': {
+                      '&:hover, &:focus-visible, &.Mui-expanded': {
+                        backgroundImage: 'linear-gradient(135deg, #155799 0%, #159957 100%)',
+                        borderLeftColor: 'transparent',
+                        borderRightColor: 'transparent',
+                        borderBottomColor: 'transparent',
+                        color: '#FFFFFF',
+                        boxShadow: '0 16px 36px rgba(21, 87, 153, 0.18)',
+                      },
+                      '&:hover .MuiTypography-root, &:focus-visible .MuiTypography-root, &.Mui-expanded .MuiTypography-root, &:hover .MuiSvgIcon-root, &:focus-visible .MuiSvgIcon-root, &.Mui-expanded .MuiSvgIcon-root': {
+                        color: '#FFFFFF',
+                      },
                     },
                     '& .MuiAccordionSummary-content': {
                       my: 1.5,
                     },
                 }}
               >
-                <Typography sx={{ fontSize: 18, fontWeight: 900, whiteSpace: 'nowrap' }}>{faq.question}</Typography>
+                <Typography sx={{ width: '100%', fontSize: 15, fontWeight: 900, textAlign: 'center', whiteSpace: 'nowrap' }}>{faq.question}</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
