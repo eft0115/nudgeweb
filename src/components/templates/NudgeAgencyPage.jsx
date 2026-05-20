@@ -260,34 +260,38 @@ const heroStoryPanels = [
     image: webnudgeLogo,
     imageAlt: '손가락으로 가리키는 땅콩 캐릭터',
     imageSide: 'left',
+    textSizeBoost: 2,
     paragraphs: [
-      '사업의 성공은 고객의 관심을 이끌어 내야하고\n고객의 관심은 무의식적인 행동패턴을 가져오는 것입니다.',
-      '신기하게도ㅡ',
-      '이는 웹페이지에서도 똑같이 적용이되며,\n웹페이지의 관심은 결국 매출로가는 첫 걸음이 됩니다.',
-      '그 시작은,\n고객의 감정이 무엇인지 파악하여 공유해야하며,\n이러한 무의식적인 관심을 끌어내도록 웹페이지는 디자인되어야 합니다.',
+      '사업의 성공은 고객의 관심을 이끌어내야하고, 고객의 관심은 무의식적인 행동패턴을 가져오는 것입니다.\n',
+      '신기하게도, 이는 웹페이지에서도 똑같이 적용이 되며, 웹페이지의 관심은 결국 매출로 가는 첫 걸음이 됩니다.\n',
+      '그 시작은, 고객의 감정이 무엇인지 파악하여 공유해야하며,\n\n이러한 무의식적인 관심을 끌어내도록 웹페이지는 디자인 되어야합니다.',
     ],
   },
   {
     number: '2.',
+    titleUnderlineGap: { xs: 0.25, md: 0.35 },
+    textOffsetY: '-2px',
+    textSizeBoost: true,
     title: '고객의 문제에 공감하기!',
     image: webnudgeSympathyPair,
     imageAlt: '큰 땅콩이 작은 땅콩을 공감해주는 장면',
     imageSide: 'right',
     paragraphs: [
-      '고객의 감정을 파악하여 공유를 하게 되면\n고객은 홀린듯 관심을 보이기 시작합니다.',
-      '이 때,\n이 감정을 진심으로 이해하고\n감정의 원인을 알아준다면,\n고객은 더욱 더 나도 모르게..\n사장님의 브랜드에 관심을 가지게 됩니다.',
+      '고객의 감정을 파악하여 공유를 하게 되면 고객은 홀린듯 관심을 보이기 시작합니다.\n\n',
+      '이 때, 이 감정을 진심으로 이해하고 감정의 원인을 알아준다면, 고객은 더욱 더 나도 모르게.. 사장님의 브랜드에 관심을 가지게 됩니다.\n\n',
       '감정을 공감하는 웹디자인이 고객의 마음을 얻습니다.',
     ],
   },
   {
     number: '3.',
-    title: '고객에게 해결책을 주고 기대하게 만들기!',
+    title: '고객에게 해결책을 주고\n기대하게 만들기!',
     image: webnudgeJumpMascot,
     imageAlt: '신나서 두 팔 벌린 땅콩 캐릭터',
     imageSide: 'left',
+    textSizeBoost: 2,
     paragraphs: [
-      '고객의 감정을 알아차리고,\n고객의 감정에 공감을 해주게 된다면\n이제 사장님은 신뢰를 얻습니다.',
-      '이 때, 고객에게 문제의 해결책을 제시하고\n기대하게 만든다면 결제의 단계로\n나아갈 준비가 된 것입니다.',
+      '고객의 감정을 알아차리고,\n고객의 감정에 공감을 해주게 된다면\n이제 사장님은 신뢰를 얻습니다.\n\n',
+      '이 때, 고객에게 문제의 해결책을 제시하고\n기대하게 만든다면 결제의 단계로\n나아갈 준비가 된 것입니다.\n\n',
       '이 순서를 웹페이지 디자인에 녹여내야합니다.',
     ],
   },
@@ -297,10 +301,11 @@ const heroStoryPanels = [
     image: webnudgeActionHover,
     imageAlt: '계산대에서 결제하는 땅콩 캐릭터',
     imageSide: 'right',
+    textSizeBoost: 2,
     paragraphs: [
-      '고객의 감정 -> 공감 -> 기대까지 얻어냈다면\n마지막으로 고객이 행동하게끔 만들어야합니다.',
-      '고객의 행동은 사장님의 입장에서는\n매출과 이익과 연결됩니다. 곧, 수익이죠!',
-      '이러한 행동을 이끌어 내는 순차적 디자인이어야\n사업의 성공으로 갈 수 있습니다.',
+      '고객의 감정 -> 공감 -> 기대까지 얻어냈다면 마지막으로 고객이 행동하게끔 만들어야합니다.\n\n',
+      '고객의 행동은 사장님의 입장에서는\n매출과 이익과 연결됩니다. 곧, 수익이죠!\n\n',
+      '이러한 행동을 이끌어 내는 순차적 디자인 이어야 사업의 성공으로 갈 수 있습니다.',
     ],
   },
 ];
@@ -474,6 +479,66 @@ function BrandMascot({
   );
 }
 
+function ScrollRevealStack({ children, sx = {}, ...props }) {
+  const stackRef = useRef(null);
+
+  useEffect(() => {
+    const element = stackRef.current;
+
+    if (!element) {
+      return undefined;
+    }
+
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (reducedMotionQuery.matches || typeof IntersectionObserver === 'undefined') {
+      element.dataset.revealed = 'true';
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          element.dataset.revealed = 'true';
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <Stack
+      ref={stackRef}
+      data-revealed="false"
+      sx={{
+        opacity: 0,
+        transform: 'translateX(-34px)',
+        transition: 'opacity 720ms cubic-bezier(0.16, 1, 0.3, 1), transform 720ms cubic-bezier(0.16, 1, 0.3, 1)',
+        willChange: 'opacity, transform',
+        '&[data-revealed="true"]': {
+          opacity: 1,
+          transform: 'translateX(0)',
+          willChange: 'auto',
+        },
+        '@media (prefers-reduced-motion: reduce)': {
+          opacity: 1,
+          transform: 'translateX(0)',
+          transition: 'none',
+        },
+        ...sx,
+      }}
+      {...props}
+    >
+      {children}
+    </Stack>
+  );
+}
+
 function TypewriterBrandName() {
   return (
     <Typography
@@ -482,10 +547,10 @@ function TypewriterBrandName() {
       sx={{
         display: 'inline-grid',
         position: 'relative',
-        minWidth: '9.5ch',
+        minWidth: { xs: '5.1ch', md: '9.5ch' },
         color: 'secondary.main',
         fontWeight: 900,
-        fontSize: { xs: 20, sm: 24, md: 30 },
+        fontSize: { xs: 17, sm: 24, md: 30 },
         fontFamily: 'Outfit, "Pretendard Variable", Pretendard, system-ui, sans-serif',
         lineHeight: 1,
         overflow: 'visible',
@@ -506,11 +571,12 @@ function TypewriterBrandName() {
     >
       <Box
         component="span"
+        className="brand-desktop-text"
         sx={{
-          display: 'inline-block',
+          display: { xs: 'none', md: 'inline-block' },
           width: '100%',
           height: 35,
-          lineHeight: { xs: '26px', sm: '30px', md: '35px' },
+          lineHeight: '35px',
           overflow: 'hidden',
           whiteSpace: 'nowrap',
           pr: 0.5,
@@ -530,9 +596,37 @@ function TypewriterBrandName() {
       </Box>
       <Box
         component="span"
+        className="brand-mobile-text"
+        aria-label="NudgeWeb"
+        sx={{
+          display: { xs: 'inline-grid', md: 'none' },
+          gridTemplateRows: 'repeat(2, 1em)',
+          lineHeight: 1,
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          pr: 0.25,
+          animation: 'brandMobileFadeIn 820ms ease-out 0.12s both',
+          '@keyframes brandMobileFadeIn': {
+            '0%': {
+              opacity: 0,
+              transform: 'translateY(4px)',
+            },
+            '100%': {
+              opacity: 1,
+              transform: 'translateY(0)',
+            },
+          },
+        }}
+      >
+        <Box component="span" sx={{ lineHeight: 1 }}>Nudge</Box>
+        <Box component="span" sx={{ lineHeight: 1 }}>Web</Box>
+      </Box>
+      <Box
+        component="span"
         className="brand-hover-tagline"
         sx={{
           position: 'absolute',
+          display: { xs: 'none', md: 'block' },
           top: 'calc(100% + 8px)',
           left: '50%',
           opacity: 0,
@@ -728,6 +822,28 @@ function NudgeAgencyPage() {
 }
 
 function SiteHeader({ onHeroBackgroundChange, onContactOpen }) {
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  const handleMobileNavClick = (targetBackground) => {
+    if (targetBackground !== undefined) {
+      onHeroBackgroundChange(targetBackground);
+    }
+
+    setIsMobileNavOpen(false);
+  };
+
+  useEffect(() => {
+    if (!isMobileNavOpen) {
+      return undefined;
+    }
+
+    const closeMobileNav = () => setIsMobileNavOpen(false);
+
+    window.addEventListener('scroll', closeMobileNav, { passive: true });
+
+    return () => window.removeEventListener('scroll', closeMobileNav);
+  }, [isMobileNavOpen]);
+
   return (
     <Box
       component="header"
@@ -735,8 +851,8 @@ function SiteHeader({ onHeroBackgroundChange, onContactOpen }) {
         position: 'sticky',
         top: 0,
         zIndex: 10,
-        bgcolor: 'rgba(255, 255, 255, 0.92)',
-        backdropFilter: 'blur(14px)',
+        bgcolor: '#FFFFFF',
+        backdropFilter: 'none',
       }}
     >
       <Container maxWidth="xl">
@@ -744,19 +860,31 @@ function SiteHeader({ onHeroBackgroundChange, onContactOpen }) {
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          sx={{ minHeight: { xs: 64, md: 72 }, gap: { xs: 1, md: 2 } }}
+          sx={{ minHeight: { xs: 64, md: 72 }, gap: { xs: 0, md: 2 }, position: 'relative' }}
         >
-          <Stack direction="row" spacing={{ xs: 0.75, md: 1.25 }} alignItems="center" sx={{ minWidth: 0 }}>
+          <Stack
+            direction="row"
+            spacing={{ xs: 0.25, md: 1.25 }}
+            alignItems="center"
+            sx={{
+              minWidth: 0,
+              flex: { xs: '0 0 30%', md: '0 0 auto' },
+              maxWidth: { xs: '30%', md: 'none' },
+              overflow: { xs: 'visible', md: 'initial' },
+            }}
+          >
             <Box
               component="a"
               href="/"
               aria-label="메인페이지로 이동"
               sx={{
-                width: { xs: 58, md: 116 },
-                height: { xs: 58, md: 116 },
+                width: { xs: 52, md: 116 },
+                height: { xs: 52, md: 116 },
+                minWidth: { xs: 52, md: 116 },
+                flex: { xs: '0 0 52px', md: '0 0 116px' },
                 display: 'grid',
                 placeItems: 'center',
-                overflow: 'hidden',
+                overflow: 'visible',
                 color: 'inherit',
                 textDecoration: 'none',
                 cursor: 'pointer',
@@ -774,7 +902,7 @@ function SiteHeader({ onHeroBackgroundChange, onContactOpen }) {
               }}
             >
               <BrandMascot
-                size={{ xs: 58, md: 116 }}
+                size={{ xs: 52, md: 116 }}
                 alt="NudgeWeb logo"
                 sx={{
                   mixBlendMode: 'multiply',
@@ -798,6 +926,114 @@ function SiteHeader({ onHeroBackgroundChange, onContactOpen }) {
             </Box>
             <TypewriterBrandName />
           </Stack>
+          <Box
+            aria-hidden="true"
+            sx={{
+              display: { xs: 'block', md: 'none' },
+              flex: '0 0 40%',
+              maxWidth: '40%',
+            }}
+          />
+          <Box
+            sx={{
+              display: { xs: 'flex', md: 'none' },
+              flex: '0 0 30%',
+              maxWidth: '30%',
+              justifyContent: 'flex-end',
+              position: 'relative',
+            }}
+          >
+            <Button
+              type="button"
+              aria-label={isMobileNavOpen ? '모바일 메뉴 닫기' : '모바일 메뉴 열기'}
+              aria-expanded={isMobileNavOpen}
+              onClick={() => setIsMobileNavOpen((current) => !current)}
+              sx={{
+                minWidth: 0,
+                width: '100%',
+                height: 42,
+                px: 1,
+                py: 0,
+                position: 'relative',
+                borderRadius: '64% 36% 59% 41% / 48% 64% 36% 52%',
+                color: 'secondary.main',
+                border: 0,
+                bgcolor: 'transparent',
+                fontSize: { xs: 12, sm: 13 },
+                fontWeight: 900,
+                letterSpacing: 0,
+                boxShadow: '0 10px 24px rgba(58, 36, 21, 0.08)',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: 'inherit',
+                  padding: '2px',
+                  background: 'linear-gradient(135deg, #b9a0a0 0%, #794747 34%, #4e2020 68%, #111111 100%)',
+                  WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+                  WebkitMaskComposite: 'xor',
+                  maskComposite: 'exclude',
+                  pointerEvents: 'none',
+                },
+                '&:hover, &:focus-visible': {
+                  bgcolor: 'transparent',
+                },
+              }}
+            >
+              {isMobileNavOpen ? '닫기' : '넛지웹이란?'}
+            </Button>
+            <Stack
+              component="nav"
+              spacing={1}
+              sx={{
+                position: 'absolute',
+                top: 'calc(100% + 10px)',
+                right: 0,
+                width: 'min(156px, calc(100vw - 32px))',
+                p: 1,
+                borderRadius: '16px',
+                bgcolor: '#FFFFFF',
+                border: '1px solid',
+                borderColor: 'rgba(58, 36, 21, 0.12)',
+                boxShadow: '0 22px 60px rgba(25, 31, 44, 0.18)',
+                backdropFilter: 'none',
+                opacity: isMobileNavOpen ? 1 : 0,
+                visibility: isMobileNavOpen ? 'visible' : 'hidden',
+                transform: isMobileNavOpen ? 'translateY(0)' : 'translateY(-8px)',
+                transition: 'opacity 180ms ease, transform 180ms ease, visibility 180ms ease',
+                pointerEvents: isMobileNavOpen ? 'auto' : 'none',
+                zIndex: 20,
+              }}
+            >
+              {navStoryItems.map((item) => {
+                const targetBackground = navBackgroundTargets[item.target];
+
+                return (
+                  <Button
+                    key={item.target}
+                    href={`#${item.target}`}
+                    {...homepageButtonProps}
+                    onClick={() => handleMobileNavClick(targetBackground)}
+                    sx={{
+                      justifyContent: 'space-between',
+                      minHeight: 44,
+                      borderRadius: '10px',
+                      color: 'secondary.main',
+                      borderColor: 'rgba(58, 36, 21, 0.18)',
+                      bgcolor: '#FFFFFF',
+                      '&:hover, &:focus-visible': {
+                        borderColor: 'primary.main',
+                        bgcolor: 'rgba(225, 140, 55, 0.08)',
+                      },
+                    }}
+                    endIcon={<ArrowForwardIcon />}
+                  >
+                    {item.label}
+                  </Button>
+                );
+              })}
+            </Stack>
+          </Box>
           <Stack
             component="nav"
             direction="row"
@@ -985,6 +1221,7 @@ function SiteHeader({ onHeroBackgroundChange, onContactOpen }) {
             endIcon={<ArrowForwardIcon />}
             onClick={onContactOpen}
             sx={{
+              display: { xs: 'none', md: 'inline-flex' },
               flex: '0 0 auto',
               minWidth: { xs: 112, sm: 132 },
               px: { xs: 1.25, sm: 2 },
@@ -1190,7 +1427,7 @@ function HeroSection({
         sx={{
           position: 'absolute',
           left: '50%',
-          bottom: { xs: 24, md: 39 },
+          bottom: { xs: 14, md: 39 },
           zIndex: 5,
           transform: 'translateX(-50%)',
           bgcolor: 'transparent',
@@ -1308,6 +1545,7 @@ function HeroSection({
             spacing={0}
             alignItems="center"
             sx={{
+              display: { xs: shouldShowHeroCopy ? 'flex' : 'none', md: 'flex' },
               position: 'relative',
               minHeight: { xs: 'auto', md: 340 },
               justifyContent: 'center',
@@ -1315,6 +1553,7 @@ function HeroSection({
               opacity: shouldShowHeroCopy ? 1 : 0,
               visibility: shouldShowHeroCopy ? 'visible' : 'hidden',
               pointerEvents: shouldShowHeroCopy ? 'auto' : 'none',
+              transform: 'translateY(20px)',
               transition: 'opacity 420ms ease, visibility 420ms ease',
             }}
           >
@@ -1322,7 +1561,7 @@ function HeroSection({
               variant="h1"
               sx={{
                 maxWidth: 1503,
-                fontSize: { xs: 'clamp(40px, 11.8vw, 52px)', sm: 74, lg: 86 },
+                fontSize: { xs: 'clamp(32px, 9.4vw, 42px)', sm: 59, lg: 69 },
                 lineHeight: 1.14,
                 color: 'transparent',
                 backgroundImage: 'linear-gradient(90deg, #3C3B3F 0%, #605C3C 100%)',
@@ -1450,16 +1689,16 @@ function HeroSection({
               </Box>
               <Box component="span" className="hero-title-line">
                 <Box component="span" className="hero-title-text hero-title-fade">
-                  하나로~ 시작된다!
+                  하나로 시작된다!
                 </Box>
               </Box>
             </Typography>
               <Typography
                 variant="h5"
                 sx={{
-                  width: heroSubtitleWidth ? `${heroSubtitleWidth}px` : 'auto',
+                  width: { xs: 'auto', sm: heroSubtitleWidth ? `${heroSubtitleWidth}px` : 'auto' },
                   maxWidth: '100%',
-                  fontSize: { xs: 16, sm: 20, md: 26 },
+                  fontSize: { xs: 13, sm: 16, md: 21 },
                   color: 'transparent',
                   backgroundImage: 'linear-gradient(90deg, #A43931 0%, #1D4350 100%)',
                 backgroundClip: 'text',
@@ -1467,7 +1706,7 @@ function HeroSection({
                 WebkitTextFillColor: 'transparent',
                   fontWeight: 700,
                   textAlign: 'center',
-                  whiteSpace: { xs: 'normal', sm: 'nowrap' },
+                  whiteSpace: 'nowrap',
                   mt: { xs: 4, md: 5 },
                   mb: { xs: 1.5, md: 2 },
                 }}
@@ -1481,8 +1720,8 @@ function HeroSection({
                 position: 'relative',
                 overflow: 'visible',
                 alignSelf: 'center',
-                width: '100%',
-                maxWidth: { xs: 'calc(100vw - 48px)', md: 502 },
+                width: 200,
+                maxWidth: 200,
                 minHeight: 50,
                 borderRadius: '5px',
                 mt: { xs: 1.5, md: 2 },
@@ -1582,9 +1821,9 @@ function HeroStoryPanel({ panel }) {
         sx={{
           width: '100%',
           maxWidth: 1144,
-          minHeight: { xs: 572, md: 396 },
+          minHeight: { xs: 392, md: 396 },
           display: 'flex',
-          flexDirection: { xs: 'column', md: imageFirst ? 'row' : 'row-reverse' },
+          flexDirection: { xs: 'row', md: imageFirst ? 'row' : 'row-reverse' },
           overflow: 'hidden',
           position: 'relative',
           borderRadius: '20px',
@@ -1645,12 +1884,12 @@ function HeroStoryPanel({ panel }) {
       >
         <Box
           sx={{
-            flex: { xs: '0 0 auto', md: '0 0 38%' },
-            minHeight: { xs: 253, md: 396 },
+            flex: { xs: '0 0 30%', md: '0 0 38%' },
+            minHeight: { xs: 392, md: 396 },
             display: 'flex',
             alignItems: 'flex-end',
             justifyContent: 'center',
-            p: { xs: '22px 0 0', md: '20px 0 0' },
+            p: { xs: '16px 0 0', md: '20px 0 0' },
             bgcolor: '#FDF8F2',
           }}
         >
@@ -1659,8 +1898,8 @@ function HeroStoryPanel({ panel }) {
             src={panel.image}
             alt={panel.imageAlt}
             sx={{
-              width: { xs: '97.5%', md: '112.5%' },
-              maxHeight: { xs: 303, md: 385 },
+              width: { xs: '118%', md: '112.5%' },
+              maxHeight: { xs: 344, md: 385 },
               objectFit: 'contain',
               display: 'block',
               filter: 'drop-shadow(0 22px 26px rgba(58, 36, 21, 0.3))',
@@ -1669,23 +1908,23 @@ function HeroStoryPanel({ panel }) {
         </Box>
         <Box
           sx={{
-            flex: 1,
+            flex: { xs: '0 0 70%', md: 1 },
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             bgcolor: '#FFFFFF',
             p: {
-              xs: '28px 24px 32px',
+              xs: '22px 14px 22px',
               md: imageFirst ? '36px 36px 36px 28px' : '36px 28px 36px 36px',
             },
           }}
         >
-          <Stack spacing={0}>
+          <Stack spacing={0} sx={{ transform: panel.textOffsetY ? `translateY(${panel.textOffsetY})` : 'none' }}>
             <Typography
               component="span"
               sx={{
                 mb: 0.5,
-                fontSize: { xs: 44, md: 52 },
+                fontSize: panel.textSizeBoost ? { xs: 28, md: 54 } : { xs: 26, md: 52 },
                 lineHeight: 1,
                 fontWeight: 900,
                 letterSpacing: 0,
@@ -1702,13 +1941,13 @@ function HeroStoryPanel({ panel }) {
                 component="h2"
                 sx={{
                   m: 0,
-                  mb: 1.75,
+                  mb: panel.titleUnderlineGap ?? { xs: 1, md: 1.75 },
                   color: '#E18C37',
-                  fontSize: { xs: 26, md: 28 },
-                  lineHeight: 1.4,
+                  fontSize: panel.textSizeBoost ? { xs: 17, sm: 20, md: 30 } : { xs: 15, sm: 18, md: 28 },
+                  lineHeight: { xs: 1.28, md: 1.4 },
                   fontWeight: 800,
                   letterSpacing: 0,
-                  whiteSpace: { xs: 'normal', sm: 'nowrap' },
+                  whiteSpace: 'pre-line',
                 }}
               >
                 {panel.title}
@@ -1717,7 +1956,7 @@ function HeroStoryPanel({ panel }) {
                 sx={{
                   width: '100%',
                   height: 2.5,
-                  mb: 2,
+                  mb: { xs: 1.25, md: 2 },
                   borderRadius: 2,
                   background: 'linear-gradient(90deg, #E18C37, #F5C97A)',
                 }}
@@ -1729,11 +1968,11 @@ function HeroStoryPanel({ panel }) {
                 component="p"
                 sx={{
                   m: 0,
-                  '& + &': { mt: 1.25 },
+                  '& + &': { mt: { xs: 0.75, md: 1.25 } },
                   maxWidth: 760,
                   color: '#444444',
-                  fontSize: { xs: 18, md: 19 },
-                  lineHeight: 1.85,
+                  fontSize: panel.textSizeBoost ? { xs: 14, sm: 15, md: 21 } : { xs: 12, sm: 13, md: 19 },
+                  lineHeight: { xs: 1.48, md: 1.85 },
                   fontWeight: 500,
                   textWrap: 'pretty',
                   whiteSpace: 'pre-line',
@@ -1767,14 +2006,25 @@ function ProblemSection() {
           eyebrowFontSize={18}
           eyebrowImage={webnudgeWorryHover}
           eyebrowImageAlt=""
+          sx={{ pl: { xs: 1.5, md: 2.5 } }}
           titleLineGap="10px"
+          titleLineHeight={{ xs: 1.2, md: 'calc(1em + 20px)' }}
           title={(
             <>
-              예쁘기도 하고
-              <br />
-              트랜디한 디자인이지만
-              <br />
-              무엇을 해야할 모릅니다.
+              <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
+                방문자의 관심을 끌기위해서는
+                <br />
+                단계적 시스템이 필요합니다.
+              </Box>
+              <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
+                방문자의 관심을
+                <br />
+                끌기위해서는
+                <br />
+                단계적 시스템이
+                <br />
+                필요합니다.
+              </Box>
             </>
           )}
           description="방문자의 관심을 끌기 위해서는 단계적 디자인 시스템이 필요합니다."
@@ -1804,7 +2054,14 @@ function ProblemSection() {
                 boxShadow: '0 18px 45px rgba(58, 36, 21, 0.04)',
               }}
             >
-              <Stack direction="row" alignItems="center" spacing={1.25} sx={{ mb: 2.5 }}>
+              <ScrollRevealStack
+                direction="row"
+                alignItems="center"
+                spacing={1.25}
+                sx={{
+                  mb: 2.5,
+                }}
+              >
                 <Box
                   sx={{
                     width: 34,
@@ -1823,7 +2080,7 @@ function ProblemSection() {
                   {problem.number}
                 </Box>
                 <Divider sx={{ flex: 1, borderColor: '#F0DFC0' }} />
-              </Stack>
+              </ScrollRevealStack>
               <Box
                 sx={{
                   width: 52,
@@ -1956,7 +2213,13 @@ function NudgeStorySection({ activeStep, onStepChange }) {
           eyebrowImageSize={{ xs: 128, md: 246 }}
           eyebrowImageBottomOffset={{ xs: 'calc(-0.18em - 8px)', md: 'calc(-0.18em - 20px)' }}
           eyebrowImageTransform={{ xs: 'translate(-10px, 3px)', md: 'translate(-20px, 5px)' }}
-          title="넛지시스템 적용 전 VS 후"
+          title={(
+            <>
+              넛지시스템 적용
+              <br />
+              전 VS 후 비교!
+            </>
+          )}
           description="넛지시스템을 접목한 웹사이트를 만들어보세요!"
           descriptionFontSize={18}
           isInverted
@@ -2059,7 +2322,9 @@ function NudgeStorySection({ activeStep, onStepChange }) {
                   },
                 }}
               />
-              <Typography variant="h3">{nudgeStorySteps[activeStep].title}</Typography>
+              <Typography variant="h3" sx={{ fontSize: { xs: 31, md: 43 }, lineHeight: 1.28, whiteSpace: 'pre-line' }}>
+                {nudgeStorySteps[activeStep].title}
+              </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 760 }}>
                 {nudgeStorySteps[activeStep].detail}
               </Typography>
@@ -2113,6 +2378,7 @@ function NudgeStorySection({ activeStep, onStepChange }) {
 
 function PortfolioSection() {
   const [activeShowcaseIndex, setActiveShowcaseIndex] = useState(0);
+  const [openPortfolioGroupId, setOpenPortfolioGroupId] = useState(null);
   const [portfolioBurstId, setPortfolioBurstId] = useState(null);
   const portfolioBurstCounterRef = useRef(0);
   const activeShowcase = portfolioShowcases[activeShowcaseIndex];
@@ -2133,6 +2399,18 @@ function PortfolioSection() {
     portfolioBurstCounterRef.current += 1;
     setActiveShowcaseIndex(nextIndex);
     setPortfolioBurstId(`${burstId}-${portfolioBurstCounterRef.current}`);
+  };
+
+  const handlePortfolioGroupToggle = (group) => {
+    const isOpen = openPortfolioGroupId === group.id;
+
+    portfolioBurstCounterRef.current += 1;
+    setOpenPortfolioGroupId(isOpen ? null : group.id);
+    setPortfolioBurstId(`portfolio-group-${group.id}-${portfolioBurstCounterRef.current}`);
+
+    if (!isOpen) {
+      setActiveShowcaseIndex(group.sampleIndexes[0]);
+    }
   };
 
   const renderButtonFireworks = (burstId) => (
@@ -2273,7 +2551,7 @@ function PortfolioSection() {
                 </Box>
               )}
               eyebrowFontSize={18}
-              title="고객의 목적을 이루는 홈페이지"
+              title={'고객의 목적을\n이루는 홈페이지'}
             description={(
               <>
                 섹션 탭을 따라 원하는 홈페이지 샘플을
@@ -2296,7 +2574,7 @@ function PortfolioSection() {
           >
             {portfolioGroups.map((group) => {
               const isGroupActive = group.sampleIndexes.includes(activeShowcaseIndex);
-              const firstSampleIndex = group.sampleIndexes[0];
+              const isGroupOpen = openPortfolioGroupId === group.id;
 
               return (
                 <Box
@@ -2305,19 +2583,14 @@ function PortfolioSection() {
                     position: 'relative',
                     flex: '1 1 0',
                     minWidth: 0,
-                    '&:hover .portfolio-submenu, &:focus-within .portfolio-submenu': {
-                      opacity: 1,
-                      visibility: 'visible',
-                      transform: 'translateY(0)',
-                      pointerEvents: 'auto',
-                    },
                   }}
                 >
                   <Button
                     type="button"
-                    onClick={() => handlePortfolioButtonClick(firstSampleIndex, `portfolio-group-${group.id}`)}
+                    onClick={() => handlePortfolioGroupToggle(group)}
                     {...homepageButtonProps}
                     aria-pressed={isGroupActive}
+                    aria-expanded={isGroupOpen}
                     sx={{
                       ...portfolioButtonSx,
                       width: '100%',
@@ -2333,16 +2606,16 @@ function PortfolioSection() {
                     className="portfolio-submenu"
                     spacing={0.75}
                     sx={{
-                      position: { xs: 'static', sm: 'absolute' },
-                      top: 'calc(100% + 8px)',
-                      left: 0,
+                      position: 'static',
                       minWidth: '100%',
-                      mt: { xs: 0.75, sm: 0 },
-                      opacity: { xs: 1, sm: 0 },
-                      visibility: { xs: 'visible', sm: 'hidden' },
-                      pointerEvents: { xs: 'auto', sm: 'none' },
-                      transform: { xs: 'none', sm: 'translateY(-6px)' },
-                      transition: 'opacity 160ms ease, transform 160ms ease, visibility 160ms ease',
+                      maxHeight: isGroupOpen ? 220 : 0,
+                      mt: isGroupOpen ? 0.75 : 0,
+                      opacity: isGroupOpen ? 1 : 0,
+                      overflow: 'hidden',
+                      visibility: isGroupOpen ? 'visible' : 'hidden',
+                      pointerEvents: isGroupOpen ? 'auto' : 'none',
+                      transform: isGroupOpen ? 'translateY(0)' : 'translateY(-6px)',
+                      transition: 'max-height 220ms ease, margin-top 220ms ease, opacity 180ms ease, transform 180ms ease, visibility 180ms ease',
                       zIndex: 8,
                     }}
                   >
@@ -2417,7 +2690,14 @@ function PortfolioSection() {
                 {activeShowcase.eyebrow}
               </Typography>
               <Stack spacing={2}>
-                <Typography variant="h3" sx={{ maxWidth: 760 }}>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    maxWidth: 760,
+                    fontSize: { xs: 24, sm: 30, md: 40 },
+                    whiteSpace: 'nowrap',
+                  }}
+                >
                   {activeShowcase.title}
                 </Typography>
                 <Typography color="text.secondary" sx={{ maxWidth: 760 }}>
@@ -2432,10 +2712,12 @@ function PortfolioSection() {
               sx={{
                 p: { xs: 3, lg: 4 },
                 pt: { xs: 0, lg: 4 },
+                width: { xs: '100%', lg: 320 },
+                justifyContent: 'flex-end',
                 flexWrap: 'wrap',
                 gap: 1,
                 '& .MuiButton-root': {
-                  flex: { xs: '1 1 150px', sm: '0 0 auto' },
+                  flex: '0 0 auto',
                 },
               }}
             >
@@ -2464,24 +2746,6 @@ function PortfolioSection() {
                 }}
               />
               <Button
-                href="#portfolio-preview"
-                {...homepageButtonProps}
-                onClick={() => setPortfolioBurstId(`portfolio-view-${Date.now()}`)}
-                sx={{
-                  ...portfolioButtonSx,
-                  ml: 2,
-                  color: 'secondary.main',
-                  borderColor: 'secondary.main',
-                  '&:hover, &:focus-visible': {
-                    borderColor: 'primary.main',
-                    bgcolor: 'rgba(225, 140, 55, 0.08)',
-                  },
-                }}
-              >
-                <Box component="span" className="portfolio-button-label">화면에서 보기</Box>
-                {renderButtonFireworks('portfolio-view')}
-              </Button>
-              <Button
                 href={activeShowcase.url}
                 target="_blank"
                 rel="noreferrer"
@@ -2489,6 +2753,10 @@ function PortfolioSection() {
                 onClick={() => setPortfolioBurstId(`portfolio-new-window-${Date.now()}`)}
                 sx={{
                   ...portfolioButtonSx,
+                  ml: 'auto',
+                  width: 120,
+                  minWidth: 120,
+                  px: 0,
                   color: 'secondary.main',
                   borderColor: 'secondary.main',
                   '&:hover, &:focus-visible': {
@@ -2550,20 +2818,31 @@ function FaqSection() {
           justifyContent="space-between"
         >
           <SectionHeading
-            eyebrow="FAQ"
+            eyebrow={(
+              <Box
+                component="span"
+                sx={{
+                  display: 'inline-flex',
+                  alignItems: 'flex-end',
+                  gap: 0.75,
+                  lineHeight: 1,
+                }}
+              >
+                <Box component="span" sx={{ lineHeight: 1 }}>FAQ</Box>
+                <BrandMascot
+                  size={{ xs: 117, sm: 162 }}
+                  alt=""
+                  sx={{
+                    flex: '0 0 auto',
+                    mb: '-6px',
+                    transform: 'scaleX(-1) translate(-20px, 28px)',
+                  }}
+                />
+              </Box>
+            )}
             eyebrowFontSize={18}
             title="상담 전에 자주 묻는 질문"
             description="PRD의 서비스 소개, 포트폴리오, 확장성 요구를 기준으로 답변을 정리했습니다."
-          />
-          <BrandMascot
-            size={{ xs: 124, sm: 170 }}
-            alt=""
-            sx={{
-              flex: '0 0 auto',
-              alignSelf: { xs: 'flex-end', sm: 'flex-end' },
-              mb: { xs: 0, sm: 0.5 },
-              transform: 'scaleX(-1)',
-            }}
           />
         </Stack>
         <Stack spacing={1.5} sx={{ mt: 4 }}>
@@ -2589,16 +2868,28 @@ function FaqSection() {
                     borderBottom: '2px solid #159957',
                     borderTop: 0,
                     borderRadius: '0 0 18px 18px',
+                    color: 'text.primary',
+                    transition: 'background 180ms ease, color 180ms ease, border-color 180ms ease',
                     '&.Mui-expanded': {
                       minHeight: 64,
                       borderRadius: '0 0 18px 18px',
+                    },
+                    '&:hover, &:focus-visible': {
+                      background: 'linear-gradient(135deg, #155799 0%, #159957 100%)',
+                      borderLeftColor: 'transparent',
+                      borderRightColor: 'transparent',
+                      borderBottomColor: 'transparent',
+                      color: '#FFFFFF',
+                    },
+                    '&:hover .MuiTypography-root, &:focus-visible .MuiTypography-root, &:hover .MuiSvgIcon-root, &:focus-visible .MuiSvgIcon-root': {
+                      color: '#FFFFFF',
                     },
                     '& .MuiAccordionSummary-content': {
                       my: 1.5,
                     },
                 }}
               >
-                <Typography sx={{ fontSize: 20, fontWeight: 900 }}>{faq.question}</Typography>
+                <Typography sx={{ fontSize: 18, fontWeight: 900, whiteSpace: 'nowrap' }}>{faq.question}</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -2924,10 +3215,12 @@ function SectionHeading({
   eyebrowImageBottomOffset = '0.08em',
   eyebrowImageTransform,
   titleLineGap,
+  titleLineHeight,
   descriptionFontSize = 21,
+  sx,
 }) {
   return (
-    <Stack spacing={1.5} sx={{ maxWidth: 860, minWidth: 0 }}>
+    <Stack spacing={1.5} sx={{ maxWidth: 860, minWidth: 0, ...sx }}>
       <Box
         sx={{
           display: 'inline-flex',
@@ -2966,8 +3259,9 @@ function SectionHeading({
         sx={{
           fontSize: { xs: 36, md: 58 },
           overflowWrap: 'break-word',
-          lineHeight: titleLineGap ? `calc(1em + ${titleLineGap} + 10px)` : 'calc(1em + 10px)',
+          lineHeight: titleLineHeight ?? (titleLineGap ? `calc(1em + ${titleLineGap} + 10px)` : 'calc(1em + 10px)'),
           color: isInverted ? 'common.white' : 'text.primary',
+          whiteSpace: 'pre-line',
         }}
       >
         {title}
@@ -2989,3 +3283,4 @@ function SectionHeading({
 }
 
 export default NudgeAgencyPage;
+

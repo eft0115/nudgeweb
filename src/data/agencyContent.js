@@ -37,25 +37,25 @@ export const problemCards = [
 export const nudgeStorySteps = [
   {
     label: 'Before',
-    title: '방문자는 무엇을 해야 할지 모릅니다.',
+    title: '방문자는\n무엇을 해야할 지\n모릅니다.',
     detail: '뭔가 그럴듯하지만 어떤 동작을 해야할 지 몰라 홈페이지 이탈이 늘어납니다.',
     metric: 'Before',
   },
   {
     label: 'Nudge',
-    title: '다음 단계의 가이드라인을 제공합니다.',
+    title: '다음 단계의\n가이드라인을\n제공합니다.',
     detail: '메시지, 증거, CTA를 같은 맥락에 배치해 다음 행동의 비용을 낮춥니다.',
     metric: '다음 단계 자동화',
   },
   {
     label: 'After',
-    title: '확신이 생긴 순간 바로 행동합니다.',
+    title: '확신이 생긴\n순간 바로\n행동합니다.',
     detail: '자연스럽게 행동을 유도하여 고객이 원하는 결과를 만들어냅니다.',
     metric: '매출의 증가',
   },
   {
     label: '적용가능한 범위는?',
-    title: '넛지시스템의 적용범위',
+    title: '넛지시스템의\n적용범위',
     detail: '랜딩 페이지, 포트폴리오, UX 개선까지 방문자의 판단 비용을 낮추는 기준으로 설계할 수 있습니다.',
     metric: 'Services',
   },
